@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Calculadora para Estudantes e Engenheiros</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 data-i18n="title">⚡ Calculadora para Estudantes e Engenheiros</h1>
+                    <p data-i18n="subtitle">Calcule variáveis e parâmetros elétricos com precisão</p>
+                </div>
+                <div class="language-selector">
+                    <label data-i18n="language">Idioma:</label>
+                    <select onchange="changeLanguage(this.value)" style="padding: 8px; border-radius: 5px; border: 2px solid #667eea; cursor: pointer;">
+                        <option value="pt-BR" selected>Português</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegação -->
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showPage('home'); return false;" data-i18n="home">Início</a></li>
+                <li><a href="#" onclick="showPage('resistance'); return false;" data-i18n="resistance">Resistências</a></li>
+                <li><a href="#" onclick="showPage('capacitance'); return false;" data-i18n="capacitance">Capacitâncias</a></li>
+                <li><a href="#" onclick="showPage('inductance'); return false;" data-i18n="inductance">Indutâncias</a></li>
+                <li><a href="#" onclick="showPage('rc-transient'); return false;" data-i18n="rc-transient">Circuito RC</a></li>
+                <li><a href="#" onclick="showPage('rl-transient'); return false;" data-i18n="rl-transient">Circuito RL</a></li>
+                <li><a href="#" onclick="showPage('voltage-divider'); return false;" data-i18n="voltage-divider">Divisor de Tensão</a></li>
+                <li><a href="#" onclick="showPage('current-divider'); return false;" data-i18n="current-divider">Divisor de Corrente</a></li>
+                <li><a href="#" onclick="showPage('filters'); return false;" data-i18n="filters">Filtros RC</a></li>
+                <li><a href="#" onclick="showPage('reactances'); return false;" data-i18n="reactances">Reatâncias</a></li>
+                <li><a href="#" onclick="showPage('impedance'); return false;" data-i18n="impedance">Impedância</a></li>
+                <li><a href="#" onclick="showPage('delta-star'); return false;" data-i18n="delta-star">Delta-Estrela</a></li>
+                <li><a href="#" onclick="showPage('power-factor-correction'); return false;" data-i18n="power-factor-correction">Correção de Fator de Potência</a></li>
+                <li><a href="#" onclick="showPage('transformers'); return false;" data-i18n="transformers">Transformadores</a></li>
+                <li><a href="#" onclick="showPage('matrix'); return false;" data-i18n="matrix">Matrizes</a></li>
+                <li><a href="#" onclick="showPage('digital-conversion'); return false;" data-i18n="digital-conversion">Conversão Digital</a></li>
+                <li><a href="#" onclick="showPage('rlc-series'); return false;" data-i18n="rlc-series">Circuito RLC Série</a></li>
+                <li><a href="#" onclick="showPage('rlc-parallel'); return false;" data-i18n="rlc-parallel">Circuito RLC Paralelo</a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo -->
+        <div class="content">
+            <!-- Página Inicial -->
+            <div id="home" class="page active">
+                <h2 data-i18n="welcome">Bem-vindo à Calculadora de Engenharia Elétrica</h2>
+                <div class="calculator-section">
+                    <h3 data-i18n="about">Sobre esta Ferramenta</h3>
+                    <p data-i18n="description">Esta calculadora foi desenvolvida para estudantes e profissionais de engenharia elétrica, oferecendo ferramentas práticas para cálculos de:</p>
+                    <ul style="margin-left: 20px; margin-top: 15px;">
+                        <li><strong data-i18n="equivalent-resistances">Resistências Equivalentes:</strong> Cálculos para associações em série e paralelo</li>
+                        <li><strong data-i18n="equivalent-capacitances">Capacitâncias Equivalentes:</strong> Determinação de capacitâncias em série e paralelo</li>
+                        <li><strong data-i18n="equivalent-inductances">Indutâncias Equivalentes:</strong> Análise de indutâncias em série e paralelo</li>
+                        <li><strong data-i18n="rc-transient">Análise Transitória RC:</strong> <span data-i18n="rc-transient-description">Comportamento de tensão no capacitor em regime transitório</span></li>
+                        <li><strong data-i18n="rl-transient">Análise Transitória RL:</strong> <span data-i18n="rl-transient-description">Comportamento de tensão no indutor em regime transitório</span></li>
+                        <li><strong data-i18n="voltage-divider">Divisor de Tensão:</strong> Cálculo de tensões em divisores resistivos</li>
+                        <li><strong data-i18n="current-divider">Divisor de Corrente:</strong> Cálculo de correntes em circuitos paralelos</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong data-i18n="how-to-use">Como usar:</strong> Selecione a página desejada no menu acima, insira os valores nos campos de entrada e clique em "Calcular" para obter os resultados.</p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Resistências -->
+            <div id="resistance" class="page">
+                <h2 data-i18n="equivalent-resistances">Cálculo de Resistências Equivalentes</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Resistências em Série -->
+                <div class="calculator-section">
+                    <h3 data-i18n="resistances-series">Resistências em Série</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-series">A resistência equivalente em série é a soma de todas as resistências: R_eq = R1 + R2 + ... + Rn</p>
+                    
+                    <div id="resistanceSeriesInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="rs1">R1 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rs1" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rs2">R2 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rs2" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rs3">R3 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rs3" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rs4">R4 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rs4" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rs5">R5 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rs5" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSeriesResistance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearResistance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-resistance-series">Resistência Equivalente (Série):</span>
+                            <input type="text" id="resistanceSeriesResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resistências em Paralelo -->
+                <div class="calculator-section">
+                    <h3 data-i18n="resistances-parallel">Resistências em Paralelo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-parallel">A resistência equivalente em paralelo é calculada como: 1/R_eq = 1/R1 + 1/R2 + ... + 1/Rn</p>
+                    
+                    <div id="resistanceParallelInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="rp1">R1 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rp1" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rp2">R2 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rp2" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rp3">R3 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rp3" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rp4">R4 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rp4" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rp5">R5 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rp5" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateParallelResistance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearResistance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-resistance-parallel">Resistência Equivalente (Paralelo):</span>
+                            <input type="text" id="resistanceParallelResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resistência de um Condutor -->
+                <div class="calculator-section">
+                    <h3 data-i18n="conductor-resistance">Resistência de um Condutor</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="conductor-formula">A resistência de um condutor é calculada pela lei de Ohm para materiais: R = ρ × l / A, onde ρ é a resistividade, l é o comprimento e A é a área da seção reta</p>
+                    
+                    <div id="conductorResistanceInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="conductorLength">l <span class="unit-label">(m)</span></label>
+                            <input type="number" id="conductorLength" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="conductorArea">A <span class="unit-label">(d²)</span></label>
+                            <input type="number" id="conductorArea" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="conductorResistivity">ρ <span class="unit-label">(Ω·CM/m)</span></label>
+                            <input type="number" id="conductorResistivity" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateConductorResistance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearConductorResistance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="conductor-resistance-result">Resistência do Condutor (R):</span>
+                            <input type="text" id="conductorResistanceResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Capacitâncias -->
+            <div id="capacitance" class="page">
+                <h2 data-i18n="equivalent-capacitances">Cálculo de Capacitâncias Equivalentes</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Capacitâncias em Série -->
+                <div class="calculator-section">
+                    <h3 data-i18n="capacitances-series">Capacitâncias em Série</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-cap-series">A capacitância equivalente em série é calculada como: 1/C_eq = 1/C1 + 1/C2 + ... + 1/Cn</p>
+                    
+                    <div id="capacitanceSeriesInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="cs1">C1 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cs1" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cs2">C2 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cs2" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cs3">C3 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cs3" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cs4">C4 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cs4" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cs5">C5 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cs5" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSeriesCapacitance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearCapacitance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-capacitance-series">Capacitância Equivalente (Série):</span>
+                            <input type="text" id="capacitanceSeriesResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Capacitâncias em Paralelo -->
+                <div class="calculator-section">
+                    <h3 data-i18n="capacitances-parallel">Capacitâncias em Paralelo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-cap-parallel">A capacitância equivalente em paralelo é a soma de todas as capacitâncias: C_eq = C1 + C2 + ... + Cn</p>
+                    
+                    <div id="capacitanceParallelInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="cp1">C1 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cp1" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cp2">C2 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cp2" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cp3">C3 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cp3" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cp4">C4 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cp4" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="cp5">C5 <span class="unit-label">(F)</span></label>
+                            <input type="number" id="cp5" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateParallelCapacitance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearCapacitance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-capacitance-parallel">Capacitância Equivalente (Paralelo):</span>
+                            <input type="text" id="capacitanceParallelResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Capacitância de um Capacitor -->
+                <div class="calculator-section">
+                    <h3 data-i18n="capacitor-capacitance">Capacitância de um Capacitor</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="capacitor-formula">A capacitância de um capacitor é calculada como: C = (k × A / d) × 0.00000000000885, onde k é a constante dielétrica, A é a área da placa em m² e d é a distância entre as placas em metros</p>
+                    
+                    <div id="capacitorCapacitanceInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="capacitorDielectric">k <span class="unit-label">(constante dielétrica)</span></label>
+                            <input type="number" id="capacitorDielectric" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="capacitorArea">A <span class="unit-label">(m²)</span></label>
+                            <input type="number" id="capacitorArea" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="capacitorDistance">d <span class="unit-label">(m)</span></label>
+                            <input type="number" id="capacitorDistance" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCapacitorCapacitance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearCapacitorCapacitance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="capacitor-capacitance-result">Capacitância do Capacitor (C):</span>
+                            <input type="text" id="capacitorCapacitanceResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Indutâncias -->
+            <div id="inductance" class="page">
+                <h2 data-i18n="equivalent-inductances">Cálculo de Indutâncias Equivalentes</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Indutâncias em Série -->
+                <div class="calculator-section">
+                    <h3 data-i18n="inductances-series">Indutâncias em Série</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-ind-series">A indutância equivalente em série é a soma de todas as indutâncias: L_eq = L1 + L2 + ... + Ln</p>
+                    
+                    <div id="inductanceSeriesInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="ls1">L1 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="ls1" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="ls2">L2 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="ls2" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="ls3">L3 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="ls3" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="ls4">L4 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="ls4" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="ls5">L5 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="ls5" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSeriesInductance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearInductance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-inductance-series">Indutância Equivalente (Série):</span>
+                            <input type="text" id="inductanceSeriesResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indutâncias em Paralelo -->
+                <div class="calculator-section">
+                    <h3 data-i18n="inductances-parallel">Indutâncias em Paralelo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="formula-ind-parallel">A indutância equivalente em paralelo é calculada como: 1/L_eq = 1/L1 + 1/L2 + ... + 1/Ln</p>
+                    
+                    <div id="inductanceParallelInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="lp1">L1 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="lp1" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="lp2">L2 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="lp2" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="lp3">L3 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="lp3" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="lp4">L4 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="lp4" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="lp5">L5 <span class="unit-label">(H)</span></label>
+                            <input type="number" id="lp5" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateParallelInductance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearInductance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="equivalent-inductance-parallel">Indutância Equivalente (Paralelo):</span>
+                            <input type="text" id="inductanceParallelResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cálculo de Indutância de um Indutor -->
+                <div class="calculator-section">
+                    <h3>Indutância de um Indutor</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Calcule a indutância de um indutor utilizando a fórmula: L = (μ × N² × A x 0.00000126) / s</p>
+                    
+                    <div id="inductorCalculationInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="inductorPermeability">μ (Permeabilidade) <span class="unit-label">(H/m)</span></label>
+                            <input type="number" id="inductorPermeability" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="inductorTurns">N (Número de Espiras)</label>
+                            <input type="number" id="inductorTurns" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="inductorArea">A (Área da Seção) <span class="unit-label">(m²)</span></label>
+                            <input type="number" id="inductorArea" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="inductorLength">s (Comprimento da Hélice) <span class="unit-label">(m)</span></label>
+                            <input type="number" id="inductorLength" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateInductorInductance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearInductorCalculation()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label">Indutância (L):</span>
+                            <input type="text" id="inductorInductanceResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Circuito RC Transitório -->
+            <div id="rc-transient" class="page">
+                <h2 data-i18n="rc-transient-analysis">Análise Transitória de Circuito RC Série</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rc-capacitor-voltage">Cálculo de Tensão no Capacitor em Regime Transitório</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rc-formula">Fórmula: Vc(t) = V(1 - e^(-t/τ)) onde τ = RC (constante de tempo)<br>VL(t) = V - Vc(t) (tensão no resistor)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="rcVoltage"><span data-i18n="applied-voltage">Tensão Aplicada</span> <span class="unit-label">(V)</span></label>
+                            <input type="number" id="rcVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rcResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rcResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rcCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="rcCapacitance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="rcTime"><span data-i18n="analysis-time">Tempo de Análise</span> <span class="unit-label">(s)</span></label>
+                            <input type="number" id="rcTime" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRCTransient()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearRCCircuit()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="rc-results">Resultados</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="capacitor-voltage">Tensão no Capacitor Vc(t):</span>
+                            <input type="text" id="rcCapacitorVoltage" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="time-constant">Constante de Tempo (τ = RC):</span>
+                            <input type="text" id="rcTimeConstant" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rc-useful-info">Informações Úteis</h3>
+                    <p><strong data-i18n="time-constant">Constante de Tempo (τ):</strong> <span data-i18n="rc-info1">Tempo necessário para a tensão no capacitor atingir 63,2% da tensão aplicada.</span></p>
+                    <p><strong data-i18n="after-5tau">Após 5τ:</strong> <span data-i18n="rc-info2">O capacitor estará carregado a aproximadamente 99,3% da tensão aplicada (regime permanente).</span></p>
+                    <p><strong data-i18n="applications">Aplicações:</strong> <span data-i18n="rc-info3">Filtros RC, circuitos de retardo, circuitos de sincronização.</span></p>
+                </div>
+            </div>
+
+            <!-- Página de Circuito RL Transitório -->
+            <div id="rl-transient" class="page">
+                <h2 data-i18n="rl-transient-analysis">Análise Transitória de Circuito RL Série</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rl-inductor-voltage">Cálculo de Tensão no Indutor em Regime Transitório</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rl-formula">Fórmula: I(t) = (V/R)(1 - e^(-t/τ)) onde τ = L/R (constante de tempo)<br>VL(t) = V·e^(-t/τ) (tensão no indutor)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="rlVoltage"><span data-i18n="applied-voltage">Tensão Aplicada</span> <span class="unit-label">(V)</span></label>
+                            <input type="number" id="rlVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rlResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlInductance"><span data-i18n="inductance">Indutância</span> <span class="unit-label">(H)</span></label>
+                            <input type="number" id="rlInductance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlTime"><span data-i18n="analysis-time">Tempo de Análise</span> <span class="unit-label">(s)</span></label>
+                            <input type="number" id="rlTime" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRLTransient()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearRLCircuit()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="rl-results">Resultados</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="inductor-voltage">Tensão no Indutor VL(t):</span>
+                            <input type="text" id="rlInductorVoltage" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="time-constant">Constante de Tempo (τ = L/R):</span>
+                            <input type="text" id="rlTimeConstant" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rl-useful-info">Informações Úteis</h3>
+                    <p><strong data-i18n="time-constant">Constante de Tempo (τ):</strong> <span data-i18n="rl-info1">Tempo necessário para a corrente atingir 63,2% do seu valor final (V/R).</span></p>
+                    <p><strong data-i18n="after-5tau">Após 5τ:</strong> <span data-i18n="rl-info2">A corrente atingirá aproximadamente 99,3% do seu valor final e o indutor se comportará como um fio (resistência zero).</span></p>
+                    <p><strong data-i18n="applications">Aplicações:</strong> <span data-i18n="rl-info3">Filtros RL, circuitos de comutação, limitadores de corrente, supressores de transientes.</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Divisor de Tensão -->
+            <div id="voltage-divider" class="page">
+                <h2 data-i18n="voltage-divider-title">Cálculo de Divisor de Tensão</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="voltage-divider-calc">Divisor de Tensão Resistivo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="vd-formula">O divisor de tensão permite obter uma fração da tensão aplicada usando resistores.<br>Fórmula: Vx = Vt × (Rx / (R1 + R2 + ... + Rn))</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="vdR1">R1 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="vdR1" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="vdR2">R2 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="vdR2" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="vdR3">R3 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="vdR3" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="vdR4">R4 <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="vdR4" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="vdVoltage"><span data-i18n="applied-voltage">Tensão Aplicada</span> <span class="unit-label">(V)</span></label>
+                            <input type="number" id="vdVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="vdMeasuredResistance"><span data-i18n="measured-resistance">Resistência Medida</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="vdMeasuredResistance" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateVoltageDivider()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearVoltageDivider()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="voltage-at-measured-point">Tensão no Ponto Medido:</span>
+                            <input type="text" id="vdResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="vd-how-it-works">Como Funciona</h3>
+                    <p data-i18n="vd-info">O divisor de tensão é um circuito que usa resistores em série para dividir uma tensão em valores menores. A tensão em qualquer resistor é proporcional a seu valor em relação à soma total de resistências.</p>
+                    <p><strong data-i18n="example">Exemplo:</strong> <span data-i18n="vd-example">Com R1=10Ω, R2=10Ω e Vt=20V, a tensão em R2 será: V2 = 20 × (10/20) = 10V</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Divisor de Corrente -->
+            <div id="current-divider" class="page">
+                <h2 data-i18n="current-divider-title">Cálculo de Divisor de Corrente</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="current-divider-calc">Divisor de Corrente Resistivo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="cd-formula">O divisor de corrente permite distribuir uma corrente total entre ramos paralelos.<br>Fórmula: I1 = (R2 / (R1 + R2)) × It</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="cdOppositeResistance"><span data-i18n="opposite-resistance">Resistência Oposta (R2)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="cdOppositeResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="cdCurrent"><span data-i18n="applied-current">Corrente Aplicada</span> <span class="unit-label">(A)</span></label>
+                            <input type="number" id="cdCurrent" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="cdMeasuredResistance"><span data-i18n="measured-resistance">Resistência Medida (R1)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="cdMeasuredResistance" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCurrentDivider()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearCurrentDivider()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="current-at-measured-branch">Corrente no Ramo Medido (I1):</span>
+                            <input type="text" id="cdResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="cd-how-it-works">Como Funciona</h3>
+                    <p data-i18n="cd-info">O divisor de corrente é um circuito que usa resistores em paralelo para distribuir uma corrente total entre dois ou mais ramos. A corrente em cada ramo é inversamente proporcional à sua resistência.</p>
+                    <p><strong data-i18n="example">Exemplo:</strong> <span data-i18n="cd-example">Com R1=10Ω, R2=10Ω e It=2A, a corrente em R1 será: I1 = (10/(10+10)) × 2 = 1A</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Filtros -->
+            <div id="filters" class="page">
+                <h2 data-i18n="filter-frequencies">Cálculo de Frequências de Corte de Filtros</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Filtro Passa-Baixa -->
+                <div class="calculator-section">
+                    <h3 data-i18n="low-pass-filter">Filtro Passa-Baixa</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="lpf-formula">Filtro que atenua frequências acima da frequência de corte.<br>Fórmula: Fo = 1 / (2π × R × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="lpfResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="lpfResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="lpfCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="lpfCapacitance" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateLowPassFilter()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearLowPassFilter()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="cutoff-frequency">Frequência de Corte:</span>
+                            <input type="text" id="lpfResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtro Passa-Baixa - Relação Vo/Vi -->
+                <div class="calculator-section">
+                    <h3 data-i18n="low-pass-filter-vo-vi">Filtro Passa-Baixa - Relação Vo/Vi</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="lpf-vo-vi-formula">Cálculo da relação de saída/entrada do filtro passa-baixa.<br>Fórmula: Vo/Vi = Xc / √(R² + Xc²), onde Xc = 1 / (2π × f × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="lpfVoViResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="lpfVoViResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="lpfVoViCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="lpfVoViCapacitance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="lpfVoViFrequency"><span data-i18n="frequency">Frequência</span> <span class="unit-label">(Hz)</span></label>
+                            <input type="number" id="lpfVoViFrequency" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateLowPassFilterVoVi()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearLowPassFilterVoVi()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="vo-vi-ratio">Relação Vo/Vi:</span>
+                            <input type="text" id="lpfVoViResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtro Passa-Alta -->
+                <div class="calculator-section">
+                    <h3 data-i18n="high-pass-filter">Filtro Passa-Alta</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="hpf-formula">Filtro que atenua frequências abaixo da frequência de corte.<br>Fórmula: Fo = 1 / (2π × R × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="hpfResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="hpfResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="hpfCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="hpfCapacitance" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateHighPassFilter()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearHighPassFilter()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="cutoff-frequency">Frequência de Corte:</span>
+                            <input type="text" id="hpfResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtro Passa-Alta - Relação Vo/Vi -->
+                <div class="calculator-section">
+                    <h3 data-i18n="high-pass-filter-vo-vi">Filtro Passa-Alta - Relação Vo/Vi</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="hpf-vo-vi-formula">Cálculo da relação de saída/entrada do filtro passa-alta.<br>Fórmula: Vo/Vi = R / √(R² + Xc²), onde Xc = 1 / (2π × f × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="hpfVoViResistance"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="hpfVoViResistance" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="hpfVoViCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="hpfVoViCapacitance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="hpfVoViFrequency"><span data-i18n="frequency">Frequência</span> <span class="unit-label">(Hz)</span></label>
+                            <input type="number" id="hpfVoViFrequency" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateHighPassFilterVoVi()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearHighPassFilterVoVi()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="vo-vi-ratio">Relação Vo/Vi:</span>
+                            <input type="text" id="hpfVoViResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Úteis -->
+                <div class="calculator-section">
+                    <h3 style="color: #764ba2;" data-i18n="useful-information">Informações Úteis</h3>
+                    <p><strong data-i18n="low-pass-filter">Filtro Passa-Baixa:</strong> <span data-i18n="lpf-info">O filtro passa-baixa permite apenas sinais com frequências inferiores à frequência de corte. Frequências acima são atenuadas.</span></p>
+                    <p style="margin-top: 15px;"><strong data-i18n="high-pass-filter">Filtro Passa-Alta:</strong> <span data-i18n="hpf-info">O filtro passa-alta permite apenas sinais com frequências superiores à frequência de corte. Frequências abaixo são atenuadas.</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Reatâncias -->
+            <div id="reactances" class="page">
+                <h2 data-i18n="reactances-title">Cálculo de Reatâncias Capacitivas e Indutivas</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Reatância Capacitiva -->
+                <div class="calculator-section">
+                    <h3 data-i18n="capacitive-reactance">Reatância Capacitiva</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="xc-formula">A reatância capacitiva representa a oposição de um capacitor à passagem de corrente alternada.<br>Fórmula: Xc = 1 / (2π × f × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="xcCapacitance"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="xcCapacitance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="xcFrequency"><span data-i18n="frequency">Frequência</span> <span class="unit-label">(Hz)</span></label>
+                            <input type="number" id="xcFrequency" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCapacitiveReactance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearCapacitiveReactance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="capacitive-reactance-result">Reatância Capacitiva:</span>
+                            <input type="text" id="xcResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reatância Indutiva -->
+                <div class="calculator-section">
+                    <h3 data-i18n="inductive-reactance">Reatância Indutiva</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="xl-formula">A reatância indutiva representa a oposição de um indutor à passagem de corrente alternada.<br>Fórmula: XL = 2π × f × L</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="xlInductance"><span data-i18n="inductance">Indutância</span> <span class="unit-label">(H)</span></label>
+                            <input type="number" id="xlInductance" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="xlFrequency"><span data-i18n="frequency">Frequência</span> <span class="unit-label">(Hz)</span></label>
+                            <input type="number" id="xlFrequency" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateInductiveReactance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearInductiveReactance()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="inductive-reactance-result">Reatância Indutiva:</span>
+                            <input type="text" id="xlResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Úteis -->
+                <div class="calculator-section">
+                    <h3 style="color: #764ba2;" data-i18n="useful-information">Informações Úteis</h3>
+                    <p><strong data-i18n="capacitive-reactance">Reatância Capacitiva:</strong> <span data-i18n="xc-info">A reatância capacitiva diminui com o aumento da frequência. Em corrente contínua (f=0), a reatância é infinita e o capacitor se comporta como um circuito aberto.</span></p>
+                    <p style="margin-top: 15px;"><strong data-i18n="inductive-reactance">Reatância Indutiva:</strong> <span data-i18n="xl-info">A reatância indutiva aumenta com o aumento da frequência. Em corrente contínua (f=0), a reatância é zero e o indutor se comporta como um fio (sem resistência).</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Conversão de Impedância -->
+            <div id="impedance" class="page">
+                <h2 data-i18n="impedance-conversion-title">Conversão de Impedância - Forma Polar e Retangular</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Retangular para Polar -->
+                <div class="calculator-section">
+                    <h3 data-i18n="rectangular-to-polar">Retangular para Polar</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rectangular-to-polar-formula">Converte impedância na forma retangular (R + jX) para forma polar (Z∠θ)<br>Fórmulas: Z = √(R² + X²) | θ = arctan(X/R) em radianos e graus</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="rectReal"><span data-i18n="real-part">Parte Real (R)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rectReal" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rectImaginary"><span data-i18n="imaginary-part">Parte Imaginária (X)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rectImaginary" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRectangularToPolar()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearRectangularToPolar()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="magnitude">Módulo (Z):</span>
+                            <input type="text" id="polarMagnitude" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="phase-angle">Ângulo de Fase (θ):</span>
+                            <input type="text" id="polarAngle" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polar para Retangular -->
+                <div class="calculator-section">
+                    <h3 data-i18n="polar-to-rectangular">Polar para Retangular</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="polar-to-rectangular-formula">Converte impedância na forma polar (Z∠θ) para forma retangular (R + jX)<br>Fórmulas: R = Z × cos(θ) | X = Z × sin(θ)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="polarMag"><span data-i18n="magnitude">Módulo (Z)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="polarMag" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="polarAng"><span data-i18n="phase-angle">Ângulo de Fase (θ)</span> <span class="unit-label">(°)</span></label>
+                            <input type="number" id="polarAng" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculatePolarToRectangular()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearPolarToRectangular()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="real-part">Parte Real (R):</span>
+                            <input type="text" id="rectangularReal" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="imaginary-part">Parte Imaginária (X):</span>
+                            <input type="text" id="rectangularImaginary" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Úteis -->
+                <div class="calculator-section">
+                    <h3 data-i18n="useful-information">Informações Úteis</h3>
+                    <p><strong data-i18n="rectangular-form">Forma Retangular (R + jX):</strong> <span data-i18n="rectangular-info">Representa a impedância com a parte resistiva (R) e a parte reativa (X). A parte reativa é positiva para indutância (XL) e negativa para capacitância (XC).</span></p>
+                    <p style="margin-top: 15px;"><strong data-i18n="polar-form">Forma Polar (Z∠θ):</strong> <span data-i18n="polar-info">Representa a impedância pelo seu módulo (magnitude) e ângulo de fase. É útil para análise de circuitos AC e cálculos de potência.</span></p>
+                    <p style="margin-top: 15px;"><strong data-i18n="impedance-note">Nota:</strong> <span data-i18n="impedance-note-text">A impedância Z é a oposição total ao fluxo de corrente alternada em um circuito, sendo a combinação de resistência (R) e reatância (X).</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página Delta-Estrela -->
+            <div id="delta-star" class="page">
+                <h2 data-i18n="delta-star-title">Conversão Delta-Estrela e Estrela-Delta de Resistências</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Conversão Estrela para Delta -->
+                <div class="calculator-section">
+                    <h3 data-i18n="star-to-delta">Conversão Estrela para Delta</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="star-to-delta-formula">Fórmula da conversão: R1 = (Ra·Rb + Rb·Rc + Rc·Ra)/Rc | R2 = (Ra·Rb + Rb·Rc + Rc·Ra)/Ra | R3 = (Ra·Rb + Rb·Rc + Rc·Ra)/Rb</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="starRa" data-i18n="star-input-a">Ra (Ω)</label>
+                            <input type="number" id="starRa" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="starRb" data-i18n="star-input-b">Rb (Ω)</label>
+                            <input type="number" id="starRb" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="starRc" data-i18n="star-input-c">Rc (Ω)</label>
+                            <input type="number" id="starRc" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateStarToDelta()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearDeltaStarInputs('star')" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="delta-results">Resistências Delta Calculadas</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="delta-r1">R1 (Delta):</span>
+                            <input type="text" id="deltaR1" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="delta-r2">R2 (Delta):</span>
+                            <input type="text" id="deltaR2" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="delta-r3">R3 (Delta):</span>
+                            <input type="text" id="deltaR3" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversão Delta para Estrela -->
+                <div class="calculator-section">
+                    <h3 data-i18n="delta-to-star">Conversão Delta para Estrela</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="delta-to-star-formula">Fórmula da conversão: Ra = R1·R3/(R1+R2+R3) | Rb = R1·R2/(R1+R2+R3) | Rc = R2·R3/(R1+R2+R3)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="deltaR1Input" data-i18n="delta-input-1">R1 (Ω)</label>
+                            <input type="number" id="deltaR1Input" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="deltaR2Input" data-i18n="delta-input-2">R2 (Ω)</label>
+                            <input type="number" id="deltaR2Input" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="deltaR3Input" data-i18n="delta-input-3">R3 (Ω)</label>
+                            <input type="number" id="deltaR3Input" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateDeltaToStar()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearDeltaStarInputs('delta')" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="star-results">Resistências Estrela Calculadas</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="star-ra">Ra (Estrela):</span>
+                            <input type="text" id="starRaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="star-rb">Rb (Estrela):</span>
+                            <input type="text" id="starRbResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="star-rc">Rc (Estrela):</span>
+                            <input type="text" id="starRcResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página Correção de Fator de Potência -->
+            <div id="power-factor-correction" class="page">
+                <h2 data-i18n="power-factor-correction-title">Correção do Fator de Potência para Unidade</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Correção de Fator de Potência -->
+                <div class="calculator-section">
+                    <h3 data-i18n="power-factor-correction">Correção de Fator de Potência</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="pf-formula">Fórmula: θ = cos⁻¹(P/(V×I)) | Qm = P×tg(θ) | Ic = Qm/V | Xc = V/Ic | C = 0.159/(f×Xc)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="pfPower" data-i18n="power-consumed">Potência Consumida (W)</label>
+                            <input type="number" id="pfPower" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="pfCurrent" data-i18n="electrical-current">Corrente Elétrica (A)</label>
+                            <input type="number" id="pfCurrent" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="pfVoltage" data-i18n="line-voltage">Tensão da Linha (V)</label>
+                            <input type="number" id="pfVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="pfFrequency" data-i18n="network-frequency">Frequência da Rede (Hz)</label>
+                            <input type="number" id="pfFrequency" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculatePowerFactorCorrection()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearPowerFactorInputs()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="capacitance-value">Capacitância (F):</span>
+                            <input type="text" id="pfCapacitance" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+
+                    <!-- Informações Úteis -->
+                    <div class="calculator-section" style="margin-top: 30px; border-left: 4px solid #764ba2;">
+                        <h3 data-i18n="pf-useful-info">Informações Úteis</h3>
+                        <p><strong data-i18n="power-factor-label">Fator de Potência:</strong> <span data-i18n="pf-info1">Razão entre potência real e potência aparente. Um FP de 1 significa que toda a potência é aproveitada.</span></p>
+                        <p style="margin-top: 15px;"><strong data-i18n="correction-capacitor-label">Capacitor de Correção:</strong> <span data-i18n="pf-info2">Deve ser instalado em paralelo com a carga indutiva para compensar a potência reativa.</span></p>
+                        <p style="margin-top: 15px;"><strong data-i18n="result-label">Resultado:</strong> <span data-i18n="pf-info3">O resultado da capacitância é o valor necessário para corrigir o fator de potência para 1 (unidade).</span></p>
+                    </div>
+
+                    <!-- Referência Bibliográfica -->
+                    <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                        <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                        <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página de Transformadores -->
+            <div id="transformers" class="page">
+                <h2 data-i18n="transformer-title">Cálculo de Especificações de Transformadores</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Relação de Tensão -->
+                <div class="calculator-section">
+                    <h3 data-i18n="transformer-voltage-ratio">Relação de Tensão</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="transformer-voltage-formula">Fórmula: Vs = (Ns/Np) × Vp</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="trfNpVoltage"><span data-i18n="transformer-primary-turns">Espiras no Primário (Np)</span></label>
+                            <input type="number" id="trfNpVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfNsVoltage"><span data-i18n="transformer-secondary-turns">Espiras no Secundário (Ns)</span></label>
+                            <input type="number" id="trfNsVoltage" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfVpInput"><span data-i18n="transformer-primary-voltage">Tensão no Primário (Vp)</span> <span class="unit-label">(V)</span></label>
+                            <input type="number" id="trfVpInput" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTransformerVoltageRatio()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearTransformerVoltageRatio()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-secondary-voltage">Tensão no Secundário (Vs):</span>
+                            <input type="text" id="trfVsResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relação de Corrente -->
+                <div class="calculator-section">
+                    <h3 data-i18n="transformer-current-ratio">Relação de Corrente</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="transformer-current-formula">Fórmula: Is = (Np/Ns) × Ip</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="trfNpCurrent"><span data-i18n="transformer-primary-turns">Espiras no Primário (Np)</span></label>
+                            <input type="number" id="trfNpCurrent" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfNsCurrent"><span data-i18n="transformer-secondary-turns">Espiras no Secundário (Ns)</span></label>
+                            <input type="number" id="trfNsCurrent" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfIpInput"><span data-i18n="transformer-primary-current">Corrente no Primário (Ip)</span> <span class="unit-label">(A)</span></label>
+                            <input type="number" id="trfIpInput" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTransformerCurrentRatio()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearTransformerCurrentRatio()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-secondary-current">Corrente no Secundário (Is):</span>
+                            <input type="text" id="trfIsResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eficiência do Transformador -->
+                <div class="calculator-section">
+                    <h3 data-i18n="transformer-efficiency">Eficiência do Transformador</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="transformer-efficiency-formula">Fórmula: Ef = (Ps/Pp) × 100</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="trfPpInput"><span data-i18n="transformer-power-input">Potência de Entrada (Pp)</span> <span class="unit-label">(W)</span></label>
+                            <input type="number" id="trfPpInput" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfPsInput"><span data-i18n="transformer-power-output">Potência de Saída (Ps)</span> <span class="unit-label">(W)</span></label>
+                            <input type="number" id="trfPsInput" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTransformerEfficiency()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearTransformerEfficiency()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-efficiency-result">Eficiência (Ef):</span>
+                            <input type="text" id="trfEffResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Razão de Impedância -->
+                <div class="calculator-section">
+                    <h3 data-i18n="transformer-impedance-ratio">Razão de Impedância</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="transformer-impedance-formula">Fórmulas: Zp = (Np/Ns)² × Zs  ou  Zs = (Ns/Np)² × Zp</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="trfNpImp"><span data-i18n="transformer-primary-turns">Espiras no Primário (Np)</span></label>
+                            <input type="number" id="trfNpImp" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfNsImp"><span data-i18n="transformer-secondary-turns">Espiras no Secundário (Ns)</span></label>
+                            <input type="number" id="trfNsImp" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfZpInput"><span data-i18n="transformer-primary-impedance">Impedância do Primário (Zp)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="trfZpInput" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfZsInput"><span data-i18n="transformer-secondary-impedance">Impedância do Secundário (Zs)</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="trfZsInput" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTransformerImpedanceRatio()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearTransformerImpedanceRatio()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-impedance-target-primary">Impedância Alvo do Primário (Zp):</span>
+                            <input type="text" id="trfZpCalc" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-impedance-target-secondary">Impedância Alvo do Secundário (Zs):</span>
+                            <input type="text" id="trfZsCalc" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Especificação do Transformador -->
+                <div class="calculator-section">
+                    <h3 data-i18n="transformer-specification">Especificação do Transformador</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="transformer-specification-formula">Fórmulas: PW = VA × FP  |  Is = VA / Vs</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="trfVAInput"><span data-i18n="transformer-va">Potência em VA</span> <span class="unit-label">(VA)</span></label>
+                            <input type="number" id="trfVAInput" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfPowerFactorInput"><span data-i18n="transformer-power-factor">Fator de Potência (FP)</span></label>
+                            <input type="number" id="trfPowerFactorInput" placeholder="0" step="0.001" min="0" max="1">
+                        </div>
+                        <div class="form-field">
+                            <label for="trfVsSpecInput"><span data-i18n="transformer-secondary-voltage">Tensão no Secundário (Vs)</span> <span class="unit-label">(V)</span></label>
+                            <input type="number" id="trfVsSpecInput" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTransformerSpecification()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearTransformerSpecification()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-power-w">Potência em W (PW):</span>
+                            <input type="text" id="trfWResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="transformer-secondary-current-spec">Corrente no Secundário (Is):</span>
+                            <input type="text" id="trfIsSpecResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Matrizes -->
+            <div id="matrix" class="page">
+                <h2 data-i18n="matrix-determinant">Cálculo de Determinantes de Matrizes</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Determinante de Matriz 2x2 -->
+                <div class="calculator-section">
+                    <h3 data-i18n="matrix-2x2">Determinante de Matriz 2x2</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="matrix-2x2-formula">O determinante de uma matriz 2x2 é calculado como: det = (a11 × a22) - (a12 × a21)</p>
+                    
+                    <div id="matrix2x2Inputs" class="input-group">
+                        <div class="form-field">
+                            <label for="m2_a11">a11</label>
+                            <input type="number" id="m2_a11" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m2_a12">a12</label>
+                            <input type="number" id="m2_a12" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m2_a21">a21</label>
+                            <input type="number" id="m2_a21" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m2_a22">a22</label>
+                            <input type="number" id="m2_a22" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateMatrix2x2Determinant()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearMatrix2x2()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="matrix-2x2-determinant">Determinante (2x2):</span>
+                            <input type="text" id="matrix2x2Result" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Determinante de Matriz 3x3 -->
+                <div class="calculator-section">
+                    <h3 data-i18n="matrix-3x3">Determinante de Matriz 3x3</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="matrix-3x3-formula">O determinante de uma matriz 3x3 é calculado usando a regra de Sarrus (método da diagonal)</p>
+                    
+                    <div id="matrix3x3Inputs" class="input-group">
+                        <div class="form-field">
+                            <label for="m3_a11">a11</label>
+                            <input type="number" id="m3_a11" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a12">a12</label>
+                            <input type="number" id="m3_a12" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a13">a13</label>
+                            <input type="number" id="m3_a13" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a21">a21</label>
+                            <input type="number" id="m3_a21" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a22">a22</label>
+                            <input type="number" id="m3_a22" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a23">a23</label>
+                            <input type="number" id="m3_a23" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a31">a31</label>
+                            <input type="number" id="m3_a31" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a32">a32</label>
+                            <input type="number" id="m3_a32" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m3_a33">a33</label>
+                            <input type="number" id="m3_a33" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateMatrix3x3Determinant()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearMatrix3x3()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="matrix-3x3-determinant">Determinante (3x3):</span>
+                            <input type="text" id="matrix3x3Result" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Determinante de Matriz 4x4 -->
+                <div class="calculator-section">
+                    <h3 data-i18n="matrix-4x4">Determinante de Matriz 4x4</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="matrix-4x4-formula">O determinante de uma matriz 4x4 é calculado pela expansão de cofatores</p>
+                    
+                    <div id="matrix4x4Inputs" class="input-group">
+                        <div class="form-field">
+                            <label for="m4_a11">a11</label>
+                            <input type="number" id="m4_a11" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a12">a12</label>
+                            <input type="number" id="m4_a12" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a13">a13</label>
+                            <input type="number" id="m4_a13" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a14">a14</label>
+                            <input type="number" id="m4_a14" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a21">a21</label>
+                            <input type="number" id="m4_a21" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a22">a22</label>
+                            <input type="number" id="m4_a22" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a23">a23</label>
+                            <input type="number" id="m4_a23" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a24">a24</label>
+                            <input type="number" id="m4_a24" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a31">a31</label>
+                            <input type="number" id="m4_a31" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a32">a32</label>
+                            <input type="number" id="m4_a32" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a33">a33</label>
+                            <input type="number" id="m4_a33" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a34">a34</label>
+                            <input type="number" id="m4_a34" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a41">a41</label>
+                            <input type="number" id="m4_a41" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a42">a42</label>
+                            <input type="number" id="m4_a42" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a43">a43</label>
+                            <input type="number" id="m4_a43" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="m4_a44">a44</label>
+                            <input type="number" id="m4_a44" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateMatrix4x4Determinant()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearMatrix4x4()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="matrix-4x4-determinant">Determinante (4x4):</span>
+                            <input type="text" id="matrix4x4Result" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Conversão Digital -->
+            <div id="digital-conversion" class="page">
+                <h2 data-i18n="digital-conversion-title">Conversão Digital</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Binário para Decimal -->
+                <div class="calculator-section">
+                    <h3 data-i18n="binary-to-decimal">Binário para Decimal</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="binary-decimal-formula">Converte um número binário (32 bits) para decimal.</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="binaryInput"><span data-i18n="binary-number">Número Binário</span> <span class="unit-label">(32 bits)</span></label>
+                            <input type="text" id="binaryInput" placeholder="0" maxlength="32">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="convertBinaryToDecimal()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearBinaryToDecimal()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="decimal-result">Decimal:</span>
+                            <input type="text" id="binaryToDecimalResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decimal para Binário -->
+                <div class="calculator-section">
+                    <h3 data-i18n="decimal-to-binary">Decimal para Binário</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="decimal-binary-formula">Converte um número decimal para binário (32 bits).</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="decimalToBinaryInput"><span data-i18n="decimal-number">Número Decimal</span></label>
+                            <input type="number" id="decimalToBinaryInput" placeholder="0" step="1">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="convertDecimalToBinary()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearDecimalToBinary()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="binary-result">Binário:</span>
+                            <input type="text" id="decimalToBinaryResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hexadecimal para Decimal -->
+                <div class="calculator-section">
+                    <h3 data-i18n="hexadecimal-to-decimal">Hexadecimal para Decimal</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="hex-decimal-formula">Converte um número hexadecimal (32 bits) para decimal.</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="hexadecimalInput"><span data-i18n="hexadecimal-number">Número Hexadecimal</span> <span class="unit-label">(32 bits)</span></label>
+                            <input type="text" id="hexadecimalInput" placeholder="0" maxlength="8">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="convertHexadecimalToDecimal()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearHexadecimalToDecimal()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="decimal-result">Decimal:</span>
+                            <input type="text" id="hexadecimalToDecimalResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decimal para Hexadecimal -->
+                <div class="calculator-section">
+                    <h3 data-i18n="decimal-to-hexadecimal">Decimal para Hexadecimal</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="decimal-hex-formula">Converte um número decimal para hexadecimal (32 bits).</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="decimalToHexInput"><span data-i18n="decimal-number">Número Decimal</span></label>
+                            <input type="number" id="decimalToHexInput" placeholder="0" step="1">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="convertDecimalToHexadecimal()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearDecimalToHexadecimal()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="hexadecimal-result">Hexadecimal:</span>
+                            <input type="text" id="decimalToHexResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong data-i18n="digital-conversion-ref">Conversão de sistemas numéricos:</strong> <em data-i18n="digital-conversion-desc">Conversão entre sistemas binário, decimal e hexadecimal para aplicações em engenharia digital.</em></p>
+                </div>
+            </div>
+
+            <!-- Página de Circuito RLC Série -->
+            <div id="rlc-series" class="page">
+                <h2 data-i18n="rlc-series-title">Frequência de Ressonância e Fator Q - Circuito RLC Série</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Frequência de Ressonância RLC Série -->
+                <div class="calculator-section">
+                    <h3 data-i18n="rlc-series-resonance">Frequência de Ressonância RLC Série</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rlc-series-formula">Fórmula: FR = 0.159 / √(L × C)</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="rlcSeriesR"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rlcSeriesR" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlcSeriesC"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="rlcSeriesC" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlcSeriesL"><span data-i18n="inductance">Indutância</span> <span class="unit-label">(H)</span></label>
+                            <input type="number" id="rlcSeriesL" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRLCSeriesResonance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearRLCSeries()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="rlc-resonance-frequency">Frequência de Ressonância (Fr):</span>
+                            <input type="text" id="rlcSeriesFrResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Úteis -->
+                <div class="calculator-section">
+                    <h3 data-i18n="useful-information">Informações Úteis</h3>
+                    <p><strong data-i18n="rlc-series-info1-label">Frequência de Ressonância:</strong> <span data-i18n="rlc-series-info1">Frequência em que a impedância do circuito é mínima e a reatância total é zero (XL = XC).</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Circuito RLC Paralelo -->
+            <div id="rlc-parallel" class="page">
+                <h2 data-i18n="rlc-parallel-title">Frequência de Ressonância - Circuito RLC Real em Paralelo</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Frequência de Ressonância RLC Paralelo -->
+                <div class="calculator-section">
+                    <h3 data-i18n="rlc-parallel-resonance">Frequência de Ressonância RLC Paralelo Real</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rlc-parallel-formula">Fórmula: FR = (1/6.28) × √((1/(L×C)) - (R²/L²))</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="rlcParallelR"><span data-i18n="resistance">Resistência</span> <span class="unit-label">(Ω)</span></label>
+                            <input type="number" id="rlcParallelR" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlcParallelC"><span data-i18n="capacitance">Capacitância</span> <span class="unit-label">(F)</span></label>
+                            <input type="number" id="rlcParallelC" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="rlcParallelL"><span data-i18n="inductance">Indutância</span> <span class="unit-label">(H)</span></label>
+                            <input type="number" id="rlcParallelL" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRLCParallelResonance()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearRLCParallel()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="rlc-resonance-frequency">Frequência de Ressonância (Fr):</span>
+                            <input type="text" id="rlcParallelFrResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Úteis -->
+                <div class="calculator-section">
+                    <h3 data-i18n="useful-information">Informações Úteis</h3>
+                    <p><strong data-i18n="rlc-parallel-info1-label">Frequência de Ressonância Paralelo Real:</strong> <span data-i18n="rlc-parallel-info1">Frequência em que a impedância do circuito é máxima. Considera a resistência série do indutor, portanto é diferente do ideal.</span></p>
+                    <p style="margin-top: 15px;"><strong data-i18n="rlc-parallel-info2-label">Circuito RLC Paralelo Real:</strong> <span data-i18n="rlc-parallel-info2">O indutor real possui resistência série. Portanto, a frequência de ressonância é menor que a do indutor ideal.</span></p>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer>
+            <p>&copy; 2026 Calculadora de Engenharia Elétrica | Desenvolvida para estudantes e profissionais | <strong data-i18n="footer">Todos os direitos reservados ao Professor Paulo Régis Carneiro de Araújo</strong></p>
+        </footer>
+    </div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/calculations.js"></script>
+    <script>
+        // Traduzir a página quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage();
+            document.querySelector('select').value = currentLanguage;
+        });
+    </script>
+</body>
+</html>
