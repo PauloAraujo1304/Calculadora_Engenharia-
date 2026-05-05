@@ -1333,9 +1333,205 @@ function clearRLCParallel() {
     hideMessages();
 }
 
+// Variável global para armazenar os dados de radiação solar
+let solarData = [];
+
+// Função para carregar o CSV de radiação solar
+async function loadSolarRadiationData() {
+    try {
+        const response = await fetch('direct_normal_means_sedes-munic.csv');
+        const csvText = await response.text();
+        const lines = csvText.split('\n');
+        const headers = lines[0].split(';');
+
+        // Índices das colunas: D (3) = cidade, G (6) = radiação anual
+        const cityIndex = 3; // NAME
+        const radiationIndex = 6; // ANNUAL
+
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line.length > 0) {
+                const columns = line.split(';');
+                if (columns.length > Math.max(cityIndex, radiationIndex)) {
+                    solarData.push({
+                        city: columns[cityIndex],
+                        radiation: parseFloat(columns[radiationIndex])
+                    });
+                }
+            }
+        }
+
+        // Popular dropdown de cidades
+        const citySelect = document.getElementById('installationCity');
+        const uniqueCities = [...new Set(solarData.map(d => d.city))].sort();
+        uniqueCities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+
+        console.log('Dados de radiação solar carregados:', solarData.length, 'registros');
+    } catch (error) {
+        console.error('Erro ao carregar dados de radiação solar:', error);
+    }
+}
+
+// Função para calcular painéis solares
+function calculateSolarPanels() {
+    const Pm = parseFloat(document.getElementById('panelMaxPower').value);
+    const Im = parseFloat(document.getElementById('panelMaxCurrent').value);
+    const city = document.getElementById('installationCity').value;
+    const Pc = parseFloat(document.getElementById('loadPower').value);
+
+    // Validar entradas
+    if (isNaN(Pm) || Pm <= 0) {
+        showError(t('error-invalid-panel-power'));
+        return;
+    }
+    if (isNaN(Im) || Im <= 0) {
+        showError(t('error-invalid-panel-current'));
+        return;
+    }
+    if (!city) {
+        showError(t('error-invalid-city'));
+        return;
+    }
+    if (isNaN(Pc) || Pc <= 0) {
+        showError(t('error-invalid-load-power'));
+        return;
+    }
+
+    // Procurar pela radiação solar da cidade
+    const cityData = solarData.find(d => d.city === city);
+    if (!cityData) {
+        showError(t('error-invalid-city'));
+        return;
+    }
+
+    const radiation = cityData.radiation;
+
+    // Calcular Potência Fornecida: Pf = (Pm * radiation) / 1000
+    const Pf = (Pm * radiation) / 1000;
+
+    // Calcular Corrente Fornecida: If = (Im * radiation) / 1000
+    const If = (Im * radiation) / 1000;
+
+    // Calcular Quantidade de Painéis: Qp = Pc / Pf
+    const Qp = Pc / Pf;
+
+    // Exibir resultados
+    document.getElementById('solarPanelPowerResult').value = Pf.toFixed(6) + ' Wh/dia';
+    document.getElementById('solarPanelCurrentResult').value = If.toFixed(6) + ' Ah/dia';
+    document.getElementById('solarPanelQuantityResult').value = Math.ceil(Qp) + ' painéis';
+    document.getElementById('solarRadiationValue').value = radiation.toFixed(6) + ' kWh/m²/dia';
+
+    showSuccess(t('success-solar-panels'));
+}
+
+// Função para limpar campos de painéis solares
+function clearSolarPanels() {
+    document.getElementById('panelMaxPower').value = '';
+    document.getElementById('panelMaxCurrent').value = '';
+    document.getElementById('installationCity').value = '';
+    document.getElementById('loadPower').value = '';
+    document.getElementById('solarPanelPowerResult').value = '';
+    document.getElementById('solarPanelCurrentResult').value = '';
+    document.getElementById('solarPanelQuantityResult').value = '';
+    document.getElementById('solarRadiationValue').value = '';
+    hideMessages();
+}
+
+// Funções para cálculo de Consumo de Energia Elétrica
+function initializeEnergyConsumptionInputs() {
+    const powerContainer = document.getElementById('powerInputs');
+    const timeContainer = document.getElementById('timeInputs');
+    
+    // Limpar containers
+    powerContainer.innerHTML = '';
+    timeContainer.innerHTML = '';
+    
+    // Criar 10 pares de campos (Potência e Tempo)
+    for (let i = 1; i <= 10; i++) {
+        // Campo de Potência
+        const powerField = document.createElement('div');
+        powerField.className = 'form-field';
+        powerField.innerHTML = `
+            <label for="power${i}">PN${i} (W)</label>
+            <input type="number" id="power${i}" placeholder="0" step="0.001">
+        `;
+        powerContainer.appendChild(powerField);
+        
+        // Campo de Tempo
+        const timeField = document.createElement('div');
+        timeField.className = 'form-field';
+        timeField.innerHTML = `
+            <label for="time${i}">TO${i} (h/dia)</label>
+            <input type="number" id="time${i}" placeholder="0" step="0.001">
+        `;
+        timeContainer.appendChild(timeField);
+    }
+}
+
+function calculateEnergyConsumption() {
+    let totalConsumption = 0;
+    let count = 0;
+    
+    // Calcular soma de (PN * TO) para os 10 equipamentos
+    for (let i = 1; i <= 10; i++) {
+        const power = parseFloat(document.getElementById(`power${i}`).value);
+        const time = parseFloat(document.getElementById(`time${i}`).value);
+        
+        if (!isNaN(power) && !isNaN(time) && power >= 0 && time >= 0) {
+            totalConsumption += power * time;
+            if (power > 0 && time > 0) {
+                count++;
+            }
+        }
+    }
+    
+    // Obter tarifa
+    const tariff = parseFloat(document.getElementById('energyTariff').value);
+    
+    if (isNaN(tariff) || tariff <= 0) {
+        showError(t('error-invalid-energy-tariff'));
+        return;
+    }
+    
+    // Calcular consumo mensal: CT = [(PN1*TO1 + ... + PN10*TO10) * 30] / 1000
+    const monthlyConsumption = (totalConsumption * 30) / 1000;
+    
+    // Calcular valor a pagar: VP = CT * Tarifa
+    const paymentValue = monthlyConsumption * tariff;
+    
+    // Exibir resultados
+    document.getElementById('energyConsumptionResult').value = monthlyConsumption.toFixed(2) + ' KWh/mês';
+    document.getElementById('energyPaymentResult').value = 'R$ ' + paymentValue.toFixed(2);
+    
+    showSuccess(t('success-energy-consumption'));
+}
+
+function clearEnergyConsumption() {
+    // Limpar todos os campos
+    for (let i = 1; i <= 10; i++) {
+        document.getElementById(`power${i}`).value = '';
+        document.getElementById(`time${i}`).value = '';
+    }
+    document.getElementById('energyTariff').value = '';
+    document.getElementById('energyConsumptionResult').value = '';
+    document.getElementById('energyPaymentResult').value = '';
+    hideMessages();
+}
+
 // Inicialização quando o documento estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
     // Mostrar a primeira página por padrão
     document.getElementById('home').classList.add('active');
     document.querySelector('nav a').classList.add('active');
+    
+    // Inicializar campos de consumo de energia
+    initializeEnergyConsumptionInputs();
+    
+    // Carregar dados de radiação solar
+    loadSolarRadiationData();
 });
