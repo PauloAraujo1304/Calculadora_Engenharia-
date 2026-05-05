@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">Calculadora para Estudantes e Engenheiros</title>
-    <link rel="stylesheet" href="/Calculadora_Engenharia-/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
@@ -47,6 +47,8 @@
                 <li><a href="#" onclick="showPage('digital-conversion'); return false;" data-i18n="digital-conversion">Conversão Digital</a></li>
                 <li><a href="#" onclick="showPage('rlc-series'); return false;" data-i18n="rlc-series">Circuito RLC Série</a></li>
                 <li><a href="#" onclick="showPage('rlc-parallel'); return false;" data-i18n="rlc-parallel">Circuito RLC Paralelo</a></li>
+                <li><a href="#" onclick="showPage('solar-panels'); return false;" data-i18n="solar-panels">Painéis Solares</a></li>
+                <li><a href="#" onclick="showPage('energy-consumption'); return false;" data-i18n="energy-consumption">Consumo de Energia</a></li>
             </ul>
         </nav>
 
@@ -134,23 +136,23 @@
                     <div id="resistanceParallelInputs" class="input-group">
                         <div class="form-field">
                             <label for="rp1">R1 <span class="unit-label">(Ω)</span></label>
-                            <input type="number" id="rp1" placeholder="0" step="0.001">
+                            <input type="text" id="rp1" placeholder="0" step="0.001">
                         </div>
                         <div class="form-field">
                             <label for="rp2">R2 <span class="unit-label">(Ω)</span></label>
-                            <input type="number" id="rp2" placeholder="0" step="0.001">
+                            <input type="text" id="rp2" placeholder="0" step="0.001">
                         </div>
                         <div class="form-field">
                             <label for="rp3">R3 <span class="unit-label">(Ω)</span></label>
-                            <input type="number" id="rp3" placeholder="0" step="0.001">
+                            <input type="text" id="rp3" placeholder="0" step="0.001">
                         </div>
                         <div class="form-field">
                             <label for="rp4">R4 <span class="unit-label">(Ω)</span></label>
-                            <input type="number" id="rp4" placeholder="0" step="0.001">
+                            <input type="text" id="rp4" placeholder="0" step="0.001">
                         </div>
                         <div class="form-field">
                             <label for="rp5">R5 <span class="unit-label">(Ω)</span></label>
-                            <input type="number" id="rp5" placeholder="0" step="0.001">
+                            <input type="text" id="rp5" placeholder="0" step="0.001">
                         </div>
                     </div>
 
@@ -205,7 +207,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 65, 73, 97.</p>
                 </div>
             </div>
 
@@ -337,7 +339,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 346, 347, 348.</p>
                 </div>
             </div>
 
@@ -473,7 +475,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 309, 313.</p>
                 </div>
             </div>
 
@@ -531,6 +533,11 @@
                     <p><strong data-i18n="after-5tau">Após 5τ:</strong> <span data-i18n="rc-info2">O capacitor estará carregado a aproximadamente 99,3% da tensão aplicada (regime permanente).</span></p>
                     <p><strong data-i18n="applications">Aplicações:</strong> <span data-i18n="rc-info3">Filtros RC, circuitos de retardo, circuitos de sincronização.</span></p>
                 </div>
+                 <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 535, 536, 537.</p>
+                </div>
             </div>
 
             <!-- Página de Circuito RL Transitório -->
@@ -542,7 +549,7 @@
 
                 <div class="calculator-section">
                     <h3 data-i18n="rl-inductor-voltage">Cálculo de Tensão no Indutor em Regime Transitório</h3>
-                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rl-formula">Fórmula: I(t) = (V/R)(1 - e^(-t/τ)) onde τ = L/R (constante de tempo)<br>VL(t) = V·e^(-t/τ) (tensão no indutor)</p>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="rl-formula">Fórmula da tensão e da corrente elétrica sobre o indutor no tempo: I(t) = (V/R)(1 - e^(-t/τ)) onde τ = L/R (constante de tempo)<br>VL(t) = V·e^(-t/τ) (tensão no indutor)</p>
                     
                     <div class="input-group">
                         <div class="form-field">
@@ -591,7 +598,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 523, 524, 525, 526.</p>
                 </div>
             </div>
 
@@ -652,14 +659,14 @@
 
                 <div class="calculator-section">
                     <h3 data-i18n="vd-how-it-works">Como Funciona</h3>
-                    <p data-i18n="vd-info">O divisor de tensão é um circuito que usa resistores em série para dividir uma tensão em valores menores. A tensão em qualquer resistor é proporcional a seu valor em relação à soma total de resistências.</p>
+                    <p data-i18n="vd-info">O divisor de tensão é um circuito que usa resistores em série para dividir uma tensão em valores menores. A tensão em qualquer resistor é proporcional ao valor da resistência dele em relação à soma total de resistências.</p>
                     <p><strong data-i18n="example">Exemplo:</strong> <span data-i18n="vd-example">Com R1=10Ω, R2=10Ω e Vt=20V, a tensão em R2 será: V2 = 20 × (10/20) = 10V</span></p>
                 </div>
 
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Página 77.</p>
                 </div>
             </div>
 
@@ -712,13 +719,13 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Página 102.</p>
                 </div>
             </div>
 
             <!-- Página de Filtros -->
             <div id="filters" class="page">
-                <h2 data-i18n="filter-frequencies">Cálculo de Frequências de Corte de Filtros</h2>
+                <h2 data-i18n="filter-frequencies">Cálculos de Frequências de Corte de Filtros RC Série</h2>
                 
                 <div class="error-message"></div>
                 <div class="success-message"></div>
@@ -861,7 +868,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 307 a 358.</p>
                 </div>
             </div>
 
@@ -942,7 +949,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 307 a 358.</p>
                 </div>
             </div>
 
@@ -1032,7 +1039,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 307 a 358.</p>
                 </div>
             </div>
 
@@ -1130,7 +1137,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Página 157.</p>
                 </div>
             </div>
 
@@ -1189,7 +1196,7 @@
                     <!-- Referência Bibliográfica -->
                     <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                         <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                        <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                        <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 391 e 392.</p>
                     </div>
                 </div>
             </div>
@@ -1382,7 +1389,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Páginas 440 a 451.</p>
                 </div>
             </div>
 
@@ -1578,7 +1585,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>Santos, Nathan.</strong> Vetores e Matrizes. Cengage Learnig, 2007, ISBN 9788522105847.</p>
                 </div>
             </div>
 
@@ -1696,7 +1703,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong data-i18n="digital-conversion-ref">Conversão de sistemas numéricos:</strong> <em data-i18n="digital-conversion-desc">Conversão entre sistemas binário, decimal e hexadecimal para aplicações em engenharia digital.</em></p>
+                    <p><strong>Capuano, Francisco; Idoeta, Ivan.</strong> Elementos de Eletrônica Digital. Editora Erica, 1997, ISBN-13 9788571940192.</p>
                 </div>
             </div>
 
@@ -1750,7 +1757,7 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Página 492.</p>
                 </div>
             </div>
 
@@ -1805,10 +1812,171 @@
                 <!-- Referência Bibliográfica -->
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
-                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                    <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada. Página 498.</p>
+                </div>
+            </div>
+
+            <!-- Página de Painéis Solares -->
+            <div id="solar-panels" class="page">
+                <h2 data-i18n="solar-panels-title">Cálculo de Painéis Solares</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Calculadora de Painéis Solares -->
+                <div class="calculator-section">
+                    <h3 data-i18n="solar-panel-calculator">Quantidade de Painéis Solares Necessários</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="solar-panel-formula">Cálculo da quantidade de painéis solares para alimentar uma carga com base na radiação solar da região de instalação.</p>
+                    
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="panelMaxPower"><span data-i18n="solar-label-panel-power">Pm - Potência Máxima do Painel</span> <span class="unit-label">(W)</span></label>
+                            <input type="number" id="panelMaxPower" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="panelMaxCurrent"><span data-i18n="solar-label-panel-current">Im - Corrente Máxima do Painel</span> <span class="unit-label">(A)</span></label>
+                            <input type="number" id="panelMaxCurrent" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="installationCity" data-i18n="solar-label-city">Cidade de Instalação</label>
+                            <select id="installationCity" style="padding: 10px; border-radius: 5px; border: 2px solid #667eea;">
+                                <option value="" data-i18n="solar-city-select">Selecione uma cidade...</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="loadPower"><span data-i18n="solar-label-load">Energia Consumida pela Carga Durante o Dia</span> <span class="unit-label">(Wh/dia)</span></label>
+                            <input type="number" id="loadPower" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSolarPanels()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearSolarPanels()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="solar-panel-power">Potência Fornecida pelo Painel por Dia (Pf) (Wh/dia):</span>
+                            <input type="text" id="solarPanelPowerResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="solar-panel-current">Corrente Fornecida pelo Painel por Dia (If) (Ah/dia):</span>
+                            <input type="text" id="solarPanelCurrentResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="solar-panel-quantity">Quantidade de Painéis (Qp):</span>
+                            <input type="text" id="solarPanelQuantityResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações da Radiação Solar -->
+                <div class="calculator-section">
+                    <h3 data-i18n="solar-radiation-info">Informações da Radiação Solar</h3>
+                    <div class="result-field">
+                        <span class="result-label" data-i18n="solar-radiation-value">Radiação Solar Anual (DNI):</span>
+                        <input type="text" id="solarRadiationValue" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                    </div>
+                </div>
+
+                <!-- Esclarecimentos -->
+                <div class="calculator-section" style="border-left: 4px solid #667eea;">
+                    <h3 data-i18n="solar-clarification-title">Esclarecimentos Importantes</h3>
+                    <p style="line-height: 1.8;" data-i18n="solar-clarification-text">Esses cálculos servem apenas para balizar o profissional para determinar a quantidade de painéis que devem ser instalados para alimentar uma carga. Outros cálculos são necessários para projetar um sistema de energia solar completo.</p>
+                </div>
+
+                <!-- Definição de Parâmetros -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="solar-parameters-title">Definição de Parâmetros</h3>
+                    <div style="line-height: 2;">
+                        <p><strong data-i18n="param-pm">Pm (Potência do Painel):</strong> <span data-i18n="param-pm-desc">Potência máxima do painel em 1 kW/m² de radiação solar (valores típicos em watts)</span></p>
+                        <p><strong data-i18n="param-im">Im (Corrente do Painel):</strong> <span data-i18n="param-im-desc">Corrente máxima do painel em 1 kW/m² de radiação solar (valores típicos em amperes)</span></p>
+                        <p><strong data-i18n="param-pc">Pc (Potência Consumida):</strong> <span data-i18n="param-pc-desc">Potência consumida pela carga por dia (em watts)</span></p>
+                        <p><strong data-i18n="param-pf">Pf (Potência Fornecida):</strong> <span data-i18n="param-pf-desc">Potência fornecida pelo painel por dia, calculada por: Pf = (Pm × Radiação Solar) / 1000</span></p>
+                        <p><strong data-i18n="param-if">If (Corrente Fornecida):</strong> <span data-i18n="param-if-desc">Corrente fornecida pelo painel por dia, calculada por: If = (Im × Radiação Solar) / 1000</span></p>
+                        <p><strong data-i18n="param-qp">Qp (Quantidade de Painéis):</strong> <span data-i18n="param-qp-desc">Quantidade de painéis necessários, calculada por: Qp = Pc / Pf (arredondado para o próximo número inteiro)</span></p>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><strong data-i18n="solar-ref-title">Atlas Brasileiro de Energia Solar:</strong> <em data-i18n="solar-ref-institution">Instituto Nacional de Pesquisas Espaciais (INPE)</em>, 2017. <span data-i18n="solar-ref-available">Disponível em:</span> <a href="http://labren.ccst.inpe.br/" target="_blank" style="color: #667eea;">http://labren.ccst.inpe.br/</a></p>
                 </div>
             </div>
         </div>
+
+            <!-- Página de Consumo de Energia -->
+            <div id="energy-consumption" class="page">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <h2 data-i18n="energy-consumption-title" style="margin: 0; color: white;">Cálculo de Consumo de Energia Elétrica Residencial</h2>
+                </div>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Informação Descritiva -->
+                <div class="calculator-section" style="border-left: 4px solid #667eea;">
+                    <h3 data-i18n="energy-consumption-info-title">Informação Descritiva</h3>
+                    <p style="line-height: 1.8; text-align: justify;" data-i18n="energy-consumption-info-text">Esta página tem como finalidade orientar o estudante ou profissional para avaliar o consumo de energia de uma carga ou instalação residencial pequena. Para o cálculo do consumo, foi utilizado o período de 30 dias para compor o mês. E para o valor do consumo em reais, foi utilizada apenas a tarifa da concessionária (tarifa de geração + tarifa de transporte de energia) sem a inclusão de PIS/COFINS, ICMS e taxa de iluminação pública.</p>
+                </div>
+
+                <!-- Equipamentos e Tempos de Operação -->
+                <div class="calculator-section">
+                    <h3 data-i18n="energy-consumption-equipment-title">Equipamentos e Tempos de Operação</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="energy-consumption-formula">Fórmula para cálculo do consumo mensal: CT = [(PN1×TO1 + PN2×TO2 + ... + PN10×TO10) × 30]/1000 (KWh) | Valor a pagar: VP = CT × Tarifa</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 20px;">
+                        <!-- Coluna de Potências -->
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 15px; text-align: center;" data-i18n="energy-consumption-column-power">Potência Nominal (W)</h4>
+                            <div id="powerInputs" class="input-group" style="display: flex; flex-direction: column; gap: 12px;">
+                                <!-- Campos de potência serão inseridos aqui -->
+                            </div>
+                        </div>
+                        
+                        <!-- Coluna de Tempos -->
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 15px; text-align: center;" data-i18n="energy-consumption-column-time">Tempo de Operação (h/dia)</h4>
+                            <div id="timeInputs" class="input-group" style="display: flex; flex-direction: column; gap: 12px;">
+                                <!-- Campos de tempo serão inseridos aqui -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo de Tarifa -->
+                    <div class="form-field" style="max-width: 300px; margin: 20px 0;">
+                        <label for="energyTariff" data-i18n="energy-consumption-tariff">Tarifa (R$/KWh)</label>
+                        <input type="number" id="energyTariff" placeholder="0" step="0.001">
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateEnergyConsumption()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearEnergyConsumption()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <!-- Resultados -->
+                    <div class="result-box" style="margin-top: 30px;">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="energy-consumption-monthly">Consumo Mensal de Energia (CT):</span>
+                            <input type="text" id="energyConsumptionResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field" style="margin-top: 12px;">
+                            <span class="result-label" data-i18n="energy-consumption-value">Valor a Pagar (VP):</span>
+                            <input type="text" id="energyPaymentResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referência Bibliográfica -->
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p><a href="https://www.ufpb.br/cga/wp-content/uploads/sites/79/sites/365/2025/09/Manualdeconsumoconsciente_energiaeletrica.pdf" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 600;">Manual de Consumo Consciente de Energia Elétrica - UFPB</a></p>
+                </div>
+            </div>
 
         <!-- Rodapé -->
         <footer>
@@ -1816,8 +1984,8 @@
         </footer>
     </div>
 
-    <script src="/Calculadora_Engenharia-/translations.js"></script>
-    <script src="/Calculadora_Engenharia-/calculations.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/calculations.js"></script>
     <script>
         // Traduzir a página quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function() {
