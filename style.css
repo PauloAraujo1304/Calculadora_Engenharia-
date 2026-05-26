@@ -22,6 +22,10 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 header h1 {
@@ -299,9 +303,24 @@ footer {
     font-weight: normal;
 }
 
+/* Tablets e dispositivos médios (até 768px) */
 @media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    header {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
     header h1 {
         font-size: 1.8em;
+        margin-bottom: 8px;
+    }
+
+    header p {
+        font-size: 0.95em;
     }
 
     header > div {
@@ -319,6 +338,15 @@ footer {
         padding: 20px;
     }
 
+    .page h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    nav {
+        margin-bottom: 20px;
+    }
+
     nav ul {
         flex-direction: column;
     }
@@ -328,15 +356,336 @@ footer {
         border-bottom: 1px solid #eee;
     }
 
+    nav a {
+        padding: 12px 15px;
+    }
+
+    .calculator-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .calculator-section h3 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
     .input-group {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .button-group {
         flex-direction: column;
+        gap: 10px;
     }
 
     button {
         width: 100%;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+
+    .result-field {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+
+    .result-label {
+        margin-bottom: 8px;
+    }
+
+    footer {
+        padding: 15px;
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+}
+
+/* Smartphones (até 480px) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    header {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    header h1 {
+        font-size: 1.4em;
+        margin-bottom: 6px;
+    }
+
+    header p {
+        font-size: 0.85em;
+    }
+
+    .language-selector {
+        padding: 8px 10px;
+        font-size: 0.85em;
+    }
+
+    .language-selector select {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    .content {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .page h2 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    nav {
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    nav a {
+        padding: 10px 12px;
+        font-size: 0.85em;
+    }
+
+    .calculator-section {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+    }
+
+    .calculator-section h3 {
+        font-size: 1em;
+        margin-bottom: 12px;
+    }
+
+    .calculator-section p {
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+
+    .form-field label {
+        font-size: 0.85em;
+        margin-bottom: 6px;
+    }
+
+    .form-field input,
+    .form-field select {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+
+    .unit-label {
+        font-size: 0.75em;
+    }
+
+    .button-group {
+        gap: 8px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+
+    .result-box {
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 6px;
+    }
+
+    .result-box h4 {
+        font-size: 0.95em;
+        margin-bottom: 12px;
+    }
+
+    .result-field {
+        padding: 8px 0;
+        font-size: 0.85em;
+    }
+
+    .result-value {
+        font-size: 1em;
+    }
+
+    .error-message,
+    .success-message {
+        padding: 12px;
+        font-size: 0.85em;
+        margin-bottom: 15px;
+    }
+
+    footer {
+        padding: 12px;
+        margin-top: 15px;
+        border-radius: 8px;
+        font-size: 0.8em;
+    }
+}
+
+/* Ultra-pequenos (até 360px) */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 1.1em;
+    }
+
+    header p {
+        font-size: 0.8em;
+    }
+
+    .page h2 {
+        font-size: 1.1em;
+    }
+
+    nav a {
+        padding: 8px 10px;
+        font-size: 0.75em;
+    }
+
+    button {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+    .calculator-section {
+        padding: 12px;
+    }
+
+    .calculator-section h3 {
+        font-size: 0.95em;
+    }
+
+    .form-field label {
+        font-size: 0.8em;
+    }
+}
+
+/* Landscape mode (até 768px de altura) */
+@media (max-height: 768px) and (orientation: landscape) {
+    header {
+        padding: 15px 30px;
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        font-size: 0.9em;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .page h2 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .calculator-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .calculator-section h3 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    nav a {
+        padding: 10px 15px;
+    }
+
+    button {
+        padding: 8px 20px;
+    }
+}
+
+/* Mobile landscape pequeno */
+@media (max-height: 500px) and (orientation: landscape) {
+    header {
+        padding: 10px 20px;
+        margin-bottom: 10px;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+        margin-bottom: 2px;
+    }
+
+    .language-selector {
+        padding: 6px 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .page h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .calculator-section {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .form-field input,
+    .form-field select {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 6px 15px;
+        font-size: 0.8em;
+    }
+
+    footer {
+        padding: 10px;
+        font-size: 0.75em;
+        margin-top: 10px;
+    }
+}
+
+/* Melhorias de acessibilidade e contraste */
+@media (prefers-contrast: more) {
+    nav a:hover {
+        background: #667eea;
+        color: white;
+    }
+
+    button:focus {
+        outline: 3px solid #764ba2;
+        outline-offset: 2px;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    }
+}
+
+/* Modo reduzido de movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

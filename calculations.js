@@ -1272,6 +1272,130 @@ function showPage(pageId) {
 }
 
 // Funções para Circuito RLC Série
+
+// Funções para Cálculo de Derivadas
+const derivativeRules = {
+    power: {
+        label: 'y = u^n',
+        formula: 'y\' = n·u^(n-1)·u\'',
+        description: 'Derivada da Potência'
+    },
+    product: {
+        label: 'y = u·v',
+        formula: 'y\' = u\'·v + v\'·u',
+        description: 'Regra do Produto'
+    },
+    quotient: {
+        label: 'y = u/v',
+        formula: 'y\' = (u\'·v - v\'·u)/v²',
+        description: 'Regra do Quociente'
+    },
+    exponential: {
+        label: 'y = a^u (a > 0, a ≠ 1)',
+        formula: 'y\' = a^u·(ln a)·u\'',
+        description: 'Exponencial em Base a'
+    },
+    exponentialE: {
+        label: 'y = e^u',
+        formula: 'y\' = e^u·u\'',
+        description: 'Exponencial Natural'
+    },
+    logarithm: {
+        label: 'y = log_a(u)',
+        formula: 'y\' = (u\'/u)·log_a(e)',
+        description: 'Logaritmo em Base a'
+    },
+    naturalLog: {
+        label: 'y = ln(u)',
+        formula: 'y\' = (1/u)·u\'',
+        description: 'Logaritmo Natural'
+    },
+    powerOfFunction: {
+        label: 'y = u^v',
+        formula: 'y\' = v·u^(v-1)·u\' + u^v·(ln u)·v\'',
+        description: 'Função Potência'
+    },
+    sine: {
+        label: 'y = sen(u)',
+        formula: 'y\' = u\'·cos(u)',
+        description: 'Seno'
+    },
+    cosine: {
+        label: 'y = cos(u)',
+        formula: 'y\' = -u\'·sen(u)',
+        description: 'Cosseno'
+    },
+    tangent: {
+        label: 'y = tg(u)',
+        formula: 'y\' = u\'·sec²(u)',
+        description: 'Tangente'
+    },
+    cotangent: {
+        label: 'y = cotg(u)',
+        formula: 'y\' = -u\'·cosec²(u)',
+        description: 'Cotangente'
+    },
+    secant: {
+        label: 'y = sec(u)',
+        formula: 'y\' = u\'·sec(u)·tg(u)',
+        description: 'Secante'
+    },
+    cosecant: {
+        label: 'y = cosec(u)',
+        formula: 'y\' = -u\'·cosec(u)·cotg(u)',
+        description: 'Cossecante'
+    },
+    arcsin: {
+        label: 'y = arcsen(u)',
+        formula: 'y\' = u\'/√(1 - u²)',
+        description: 'Arco Seno'
+    },
+    arccos: {
+        label: 'y = arccos(u)',
+        formula: 'y\' = -u\'/√(1 - u²)',
+        description: 'Arco Cosseno'
+    },
+    arctan: {
+        label: 'y = arctg(u)',
+        formula: 'y\' = u\'/(1 + u²)',
+        description: 'Arco Tangente'
+    },
+    arccottan: {
+        label: 'y = arccotg(u)',
+        formula: 'y\' = -u\'/(1 + u²)',
+        description: 'Arco Cotangente'
+    }
+};
+
+function calculateDerivative() {
+    const functionSelect = document.getElementById('derivativeFunction');
+    const selectedValue = functionSelect.value;
+
+    if (!selectedValue) {
+        showError(t('error-select-function') || 'Por favor, selecione uma função');
+        return;
+    }
+
+    const rule = derivativeRules[selectedValue];
+    if (!rule) {
+        showError(t('error-invalid-function') || 'Função inválida');
+        return;
+    }
+
+    // Mostrar a regra de derivação
+    const resultText = `<strong>${rule.description}:</strong><br>` +
+                      `Função: ${rule.label}<br>` +
+                      `<strong style="color: #764ba2; font-size: 1.1em;">Derivada: ${rule.formula}</strong>`;
+    
+    document.getElementById('derivativeResult').innerHTML = resultText;
+    showSuccess(t('success-derivative-calculated') || 'Derivada calculada com sucesso!');
+}
+
+function clearDerivative() {
+    document.getElementById('derivativeFunction').value = '';
+    document.getElementById('derivativeResult').innerHTML = '';
+    hideMessages();
+}
 function calculateRLCSeriesResonance() {
     const R = parseFloat(document.getElementById('rlcSeriesR').value);
     const C = parseFloat(document.getElementById('rlcSeriesC').value);
