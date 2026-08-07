@@ -1,3 +1,231 @@
+const PI = 3.1415926536;
+
+function calculateRectangleArea() {
+    const base = parseFloat(document.getElementById('areasBase').value);
+    const height = parseFloat(document.getElementById('areasHeight').value);
+
+    if (isNaN(base) || isNaN(height) || base <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = base * height;
+    document.getElementById('rectangleAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateTrapezoidArea() {
+    const base1 = parseFloat(document.getElementById('areasBase1').value);
+    const base2 = parseFloat(document.getElementById('areasBase2').value);
+    const height = parseFloat(document.getElementById('areasTrapezoidHeight').value);
+
+    if (isNaN(base1) || isNaN(base2) || isNaN(height) || base1 <= 0 || base2 <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = (height * (base1 + base2)) / 2;
+    document.getElementById('trapezoidAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateTriangleArea() {
+    const base = parseFloat(document.getElementById('areasTriangleBase').value);
+    const height = parseFloat(document.getElementById('areasTriangleHeight').value);
+
+    if (isNaN(base) || isNaN(height) || base <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = (height * base) / 2;
+    document.getElementById('triangleAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateCircumferenceLength() {
+    const radius = parseFloat(document.getElementById('areasCircumferenceRadius').value);
+
+    if (isNaN(radius) || radius <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const circumference = 2 * PI * radius;
+    document.getElementById('circumferenceResult').value = circumference.toFixed(6) + ' m';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateCircleArea() {
+    const radius = parseFloat(document.getElementById('areasCircleRadius').value);
+
+    if (isNaN(radius) || radius <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = PI * radius * radius;
+    document.getElementById('circleAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateRectangularPrismVolume() {
+    const length = parseFloat(document.getElementById('areasPrismLength').value);
+    const width = parseFloat(document.getElementById('areasPrismWidth').value);
+    const height = parseFloat(document.getElementById('areasPrismHeight').value);
+
+    if (isNaN(length) || isNaN(width) || isNaN(height) || length <= 0 || width <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = length * width * height;
+    document.getElementById('rectangularPrismVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateTriangularPrismVolume() {
+    const triangleBase = parseFloat(document.getElementById('areasTriangularPrismBase').value);
+    const triangleHeight = parseFloat(document.getElementById('areasTriangularPrismHeight').value);
+    const prismHeight = parseFloat(document.getElementById('areasTriangularPrismLength').value);
+
+    if (isNaN(triangleBase) || isNaN(triangleHeight) || isNaN(prismHeight) || triangleBase <= 0 || triangleHeight <= 0 || prismHeight <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = (triangleBase * triangleHeight * prismHeight) / 2;
+    document.getElementById('triangularPrismVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateCylinderVolume() {
+    const radius = parseFloat(document.getElementById('areasCylinderRadius').value);
+    const height = parseFloat(document.getElementById('areasCylinderHeight').value);
+
+    if (isNaN(radius) || isNaN(height) || radius <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = PI * radius * radius * height;
+    document.getElementById('cylinderVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateConeVolume() {
+    const radius = parseFloat(document.getElementById('areasConeRadius').value);
+    const height = parseFloat(document.getElementById('areasConeHeight').value);
+
+    if (isNaN(radius) || isNaN(height) || radius <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = (PI * radius * radius * height) / 3;
+    document.getElementById('coneVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculatePyramidVolume() {
+    const base = parseFloat(document.getElementById('areasPyramidBase').value);
+    const baseHeight = parseFloat(document.getElementById('areasPyramidBaseHeight').value);
+    const pyramidHeight = parseFloat(document.getElementById('areasPyramidHeight').value);
+
+    if (isNaN(base) || isNaN(baseHeight) || isNaN(pyramidHeight) || base <= 0 || baseHeight <= 0 || pyramidHeight <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = (base * baseHeight * pyramidHeight) / 3;
+    document.getElementById('pyramidVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateSphereVolume() {
+    const radius = parseFloat(document.getElementById('areasSphereRadius').value);
+
+    if (isNaN(radius) || radius <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const volume = (4 * PI * radius * radius * radius) / 3;
+    document.getElementById('sphereVolumeResult').value = volume.toFixed(6) + ' m³';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateCylinderSurfaceArea() {
+    const radius = parseFloat(document.getElementById('areasCylinderSurfaceRadius').value);
+    const height = parseFloat(document.getElementById('areasCylinderSurfaceHeight').value);
+
+    if (isNaN(radius) || isNaN(height) || radius <= 0 || height <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = (2 * PI * radius * height) + (2 * PI * radius * radius);
+    document.getElementById('cylinderSurfaceAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function calculateSphereSurfaceArea() {
+    const radius = parseFloat(document.getElementById('areasSphereSurfaceRadius').value);
+
+    if (isNaN(radius) || radius <= 0) {
+        showError(t('error-invalid-value'));
+        return;
+    }
+
+    const area = 4 * PI * radius * radius;
+    document.getElementById('sphereSurfaceAreaResult').value = area.toFixed(6) + ' m²';
+    showSuccess(t('success-geometric-calculation'));
+}
+
+function clearAreasVolumeInputs(section) {
+    const inputMap = {
+        rectangle: ['areasBase', 'areasHeight'],
+        trapezoid: ['areasBase1', 'areasBase2', 'areasTrapezoidHeight'],
+        triangle: ['areasTriangleBase', 'areasTriangleHeight'],
+        circumference: ['areasCircumferenceRadius'],
+        circle: ['areasCircleRadius'],
+        rectangularPrism: ['areasPrismLength', 'areasPrismWidth', 'areasPrismHeight'],
+        triangularPrism: ['areasTriangularPrismBase', 'areasTriangularPrismHeight', 'areasTriangularPrismLength'],
+        cylinder: ['areasCylinderRadius', 'areasCylinderHeight'],
+        cone: ['areasConeRadius', 'areasConeHeight'],
+        pyramid: ['areasPyramidBase', 'areasPyramidBaseHeight', 'areasPyramidHeight'],
+        sphere: ['areasSphereRadius'],
+        cylinderSurface: ['areasCylinderSurfaceRadius', 'areasCylinderSurfaceHeight'],
+        sphereSurface: ['areasSphereSurfaceRadius']
+    };
+
+    const resultMap = {
+        rectangle: 'rectangleAreaResult',
+        trapezoid: 'trapezoidAreaResult',
+        triangle: 'triangleAreaResult',
+        circumference: 'circumferenceResult',
+        circle: 'circleAreaResult',
+        rectangularPrism: 'rectangularPrismVolumeResult',
+        triangularPrism: 'triangularPrismVolumeResult',
+        cylinder: 'cylinderVolumeResult',
+        cone: 'coneVolumeResult',
+        pyramid: 'pyramidVolumeResult',
+        sphere: 'sphereVolumeResult',
+        cylinderSurface: 'cylinderSurfaceAreaResult',
+        sphereSurface: 'sphereSurfaceAreaResult'
+    };
+
+    inputMap[section]?.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) input.value = '';
+    });
+
+    const resultElement = document.getElementById(resultMap[section]);
+    if (resultElement) resultElement.value = '';
+
+    hideMessages();
+}
+
 // Funções de cálculo de Resistências
 function calculateSeriesResistance() {
     const inputs = document.querySelectorAll('#resistanceSeriesInputs input');
@@ -1249,6 +1477,124 @@ function convertDecimalToHexadecimal() {
 function clearDecimalToHexadecimal() {
     document.getElementById('decimalToHexInput').value = '';
     document.getElementById('decimalToHexResult').value = '';
+    hideMessages();
+}
+
+function calculateDeadBeatController() {
+    const a = parseFloat(document.getElementById('deadBeatA').value);
+    const b = parseFloat(document.getElementById('deadBeatB').value);
+    const K = parseFloat(document.getElementById('deadBeatK').value);
+
+    if (isNaN(a) || isNaN(b) || isNaN(K) || a <= 0 || b < 0 || K === 0) {
+        showError(t('error-invalid-dead-beat'));
+        return;
+    }
+
+    const expA = Math.exp(-a);
+    const denominator = (K / a) - (K * expA / a);
+
+    if (Math.abs(denominator) < 1e-12) {
+        showError(t('error-invalid-dead-beat'));
+        return;
+    }
+
+    const result = `D(z) = [((z - ${expA.toFixed(6)}) / (${(K / a).toFixed(6)} - ${(K * expA / a).toFixed(6)})) * z^(-${b.toFixed(6)})] * [z^(-${(b + 1).toFixed(6)}) / (1 - z^(-${(b + 1).toFixed(6)}))]`;
+
+    document.getElementById('deadBeatControllerResult').value = result;
+    showSuccess(t('success-dead-beat'));
+}
+
+function clearDeadBeatController() {
+    document.querySelectorAll('#deadBeatControllerInputs input').forEach(input => input.value = '');
+    document.getElementById('deadBeatControllerResult').value = '';
+    hideMessages();
+}
+
+function calculatePiPidZControllers() {
+    const Kp = parseFloat(document.getElementById('piPidKp').value);
+    const Ti = parseFloat(document.getElementById('piPidTi').value);
+    const Td = parseFloat(document.getElementById('piPidTd').value);
+    const T = parseFloat(document.getElementById('piPidT').value);
+
+    if (isNaN(Kp) || isNaN(Ti) || isNaN(Td) || isNaN(T) || Ti <= 0 || T <= 0) {
+        showError(t('error-invalid-pi-pid-z'));
+        return;
+    }
+
+    const dpiNumerator = `${(Kp * (T + Ti)).toFixed(6)} - ${(Kp * Ti).toFixed(6)}*z^(-1)`;
+    const dpiDenominator = `${Ti.toFixed(6)} - ${Ti.toFixed(6)}*z^(-1)`;
+    const dpidNumerator = `${(Kp * T * Ti + Kp * T * T + Kp * Td * Ti).toFixed(6)} - ${(Kp * T * Ti + 2 * Kp * Td * Ti).toFixed(6)}*z^(-1) + ${(Kp * Td * Ti).toFixed(6)}*z^(-2)`;
+    const dpidDenominator = `${(T * Ti).toFixed(6)} - ${(T * Ti).toFixed(6)}*z^(-1)`;
+
+    document.getElementById('piPidDpiResult').value = `Dpi(z) = [${dpiNumerator}] / [${dpiDenominator}]`;
+    document.getElementById('piPidDpidResult').value = `Dpid(z) = [${dpidNumerator}] / [${dpidDenominator}]`;
+    showSuccess(t('success-pi-pid-z'));
+}
+
+function clearPiPidZControllers() {
+    document.querySelectorAll('#piPidZControllerInputs input').forEach(input => input.value = '');
+    document.getElementById('piPidDpiResult').value = '';
+    document.getElementById('piPidDpidResult').value = '';
+    hideMessages();
+}
+
+function calculateZieglerNicholsControllers() {
+    const T1 = parseFloat(document.getElementById('zieglerT1').value);
+    const TD = parseFloat(document.getElementById('zieglerTd').value);
+    const K = parseFloat(document.getElementById('zieglerK').value);
+    const T = parseFloat(document.getElementById('zieglerT').value);
+
+    if (isNaN(T1) || isNaN(TD) || isNaN(K) || isNaN(T) || T1 <= 0 || TD <= 0 || K === 0 || T <= 0) {
+        showError(t('error-invalid-ziegler-nichols'));
+        return;
+    }
+
+    const KpPi = (0.9 * T1) / (K * TD);
+    const TiPi = 3.3 * TD;
+    const KpPid = (1.2 * T1) / (K * TD);
+    const TiPid = 2 * TD;
+    const TdPid = 0.5 * TD;
+
+    const dpiExpression = `Dpi(z) = ${KpPi.toFixed(6)} + (${(KpPi * T).toFixed(6)}) / (${TiPi.toFixed(6)} * (1 - z^(-1)))`;
+    const dpidExpression = `Dpid(z) = ${KpPid.toFixed(6)} + (${(KpPid * T).toFixed(6)}) / (${TiPid.toFixed(6)} * (1 - z^(-1))) + (${(KpPid * TdPid).toFixed(6)} * (1 - z^(-1))) / ${T.toFixed(6)}`;
+
+    document.getElementById('zieglerNicholsDpiResult').value = dpiExpression;
+    document.getElementById('zieglerNicholsDpidResult').value = dpidExpression;
+    showSuccess(t('success-ziegler-nichols'));
+}
+
+function clearZieglerNicholsControllers() {
+    document.querySelectorAll('#zieglerNicholsControllerInputs input').forEach(input => input.value = '');
+    document.getElementById('zieglerNicholsDpiResult').value = '';
+    document.getElementById('zieglerNicholsDpidResult').value = '';
+    hideMessages();
+}
+
+function calculateSToZPlantConversion() {
+    const K = parseFloat(document.getElementById('sToZK').value);
+    const a = parseFloat(document.getElementById('sToZa').value);
+    const b = parseFloat(document.getElementById('sToZb').value);
+    const T = parseFloat(document.getElementById('sToZT').value);
+
+    if (isNaN(K) || isNaN(a) || isNaN(b) || isNaN(T) || a === b || T <= 0) {
+        showError(t('error-invalid-s-to-z'));
+        return;
+    }
+
+    const expA = Math.exp(-a * T);
+    const expB = Math.exp(-b * T);
+    const term1 = (K / (-a + b)) * 1;
+    const term2 = (K / (a - b)) * 1;
+
+    const result = `G(z) = {[( ${term1.toFixed(6)} )*z]/(z - ${expA.toFixed(6)})} + {[( ${term2.toFixed(6)} )*z]/(z - ${expB.toFixed(6)})}`;
+
+    document.getElementById('sToZPlantResult').value = result;
+    showSuccess(t('success-s-to-z'));
+}
+
+function clearSToZPlantConversion() {
+    document.querySelectorAll('#sToZPlantInputs input').forEach(input => input.value = '');
+    document.getElementById('sToZPlantResult').value = '';
     hideMessages();
 }
 

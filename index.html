@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">Calculadora para Estudantes, Técnicos e Engenheiros</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
@@ -30,6 +30,7 @@
         <nav>
             <ul>
                 <li><a href="#" onclick="showPage('home'); return false;" data-i18n="home">Início</a></li>
+                <li><a href="#" onclick="showPage('areas-volumes'); return false;" data-i18n="areas-volumes">Áreas e Volumes</a></li>
                 <li><a href="#" onclick="showPage('resistance'); return false;" data-i18n="resistance">Resistências</a></li>
                 <li><a href="#" onclick="showPage('capacitance'); return false;" data-i18n="capacitance">Capacitâncias</a></li>
                 <li><a href="#" onclick="showPage('inductance'); return false;" data-i18n="inductance">Indutâncias</a></li>
@@ -44,6 +45,7 @@
                 <li><a href="#" onclick="showPage('power-factor-correction'); return false;" data-i18n="power-factor-correction">Correção de Fator de Potência</a></li>
                 <li><a href="#" onclick="showPage('transformers'); return false;" data-i18n="transformers">Transformadores</a></li>
                 <li><a href="#" onclick="showPage('matrix'); return false;" data-i18n="matrix">Matrizes</a></li>
+                <li><a href="#" onclick="showPage('digital-controllers'); return false;" data-i18n="digital-controllers">Controladores Digitais</a></li>
                 <li><a href="#" onclick="showPage('digital-conversion'); return false;" data-i18n="digital-conversion">Conversão Digital</a></li>
                 <li><a href="#" onclick="showPage('rlc-series'); return false;" data-i18n="rlc-series">Circuito RLC Série</a></li>
                 <li><a href="#" onclick="showPage('rlc-parallel'); return false;" data-i18n="rlc-parallel">Circuito RLC Paralelo</a></li>
@@ -62,13 +64,13 @@
                     <h3 data-i18n="about">Sobre esta Ferramenta</h3>
                     <p data-i18n="description">Esta calculadora foi desenvolvida para estudantes e profissionais de engenharia elétrica, oferecendo ferramentas práticas para cálculos de:</p>
                     <ul style="margin-left: 20px; margin-top: 15px;">
-                        <li><strong data-i18n="equivalent-resistances">Resistências Equivalentes:</strong> Cálculos para associações em série e paralelo</li>
-                        <li><strong data-i18n="equivalent-capacitances">Capacitâncias Equivalentes:</strong> Determinação de capacitâncias em série e paralelo</li>
-                        <li><strong data-i18n="equivalent-inductances">Indutâncias Equivalentes:</strong> Análise de indutâncias em série e paralelo</li>
+                        <li><strong data-i18n="equivalent-resistances">Resistências Equivalentes:</strong> <span data-i18n="equivalent-resistances-desc">Cálculos para associações em série e paralelo</span></li>
+                        <li><strong data-i18n="equivalent-capacitances">Capacitâncias Equivalentes:</strong> <span data-i18n="equivalent-capacitances-desc">Determinação de capacitâncias em série e paralelo</span></li>
+                        <li><strong data-i18n="equivalent-inductances">Indutâncias Equivalentes:</strong> <span data-i18n="equivalent-inductances-desc">Análise de indutâncias em série e paralelo</span></li>
                         <li><strong data-i18n="rc-transient">Análise Transitória RC:</strong> <span data-i18n="rc-transient-description">Comportamento de tensão no capacitor em regime transitório</span></li>
                         <li><strong data-i18n="rl-transient">Análise Transitória RL:</strong> <span data-i18n="rl-transient-description">Comportamento de tensão no indutor em regime transitório</span></li>
-                        <li><strong data-i18n="voltage-divider">Divisor de Tensão:</strong> Cálculo de tensões em divisores resistivos</li>
-                        <li><strong data-i18n="current-divider">Divisor de Corrente:</strong> Cálculo de correntes em circuitos paralelos</li>
+                        <li><strong data-i18n="voltage-divider">Divisor de Tensão:</strong> <span data-i18n="voltage-divider-desc">Cálculo de tensões em divisores resistivos</span></li>
+                        <li><strong data-i18n="current-divider">Divisor de Corrente:</strong> <span data-i18n="current-divider-desc">Cálculo de correntes em circuitos paralelos</span></li>
                     </ul>
                     <p style="margin-top: 20px;"><strong data-i18n="how-to-use">Como usar:</strong> Selecione a página desejada no menu acima, insira os valores nos campos de entrada e clique em "Calcular" para obter os resultados.</p>
                 </div>
@@ -86,6 +88,357 @@
                 <div class="calculator-section" style="border-left: 4px solid #764ba2;">
                     <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
                     <p><strong>GUSSOW, Milton.</strong> <em data-i18n="book-title">Eletricidade Básica</em>. MAKRON Books do Brasil Editora Ltda., 2ª edição revisada e ampliada.</p>
+                </div>
+            </div>
+
+            <!-- Página de Áreas e Volumes -->
+            <div id="areas-volumes" class="page">
+                <h2 data-i18n="areas-volumes-title">Áreas e Volumes</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="areas-volumes-intro-title">Sobre esta página</h3>
+                    <p data-i18n="areas-volumes-intro">Essa página possibilita ao aluno ou profissional calcular a área de polígonos e o volume de sólidos geométricos.</p>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rectangle-area-title">Área de um Retângulo, Losango ou Paralelogramo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="rectangle-area-formula">Fórmula: A = base × altura</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasBase"><span data-i18n="base">Base</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasBase" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasHeight"><span data-i18n="height">Altura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRectangleArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('rectangle')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="area-label">Área:</span>
+                            <input type="text" id="rectangleAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="trapezoid-area-title">Área de um Trapézio</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="trapezoid-area-formula">Fórmula: A = [altura × (base 1 + base 2)] / 2</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasBase1"><span data-i18n="base-1">Base 1</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasBase1" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasBase2"><span data-i18n="base-2">Base 2</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasBase2" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasTrapezoidHeight"><span data-i18n="height">Altura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTrapezoidHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTrapezoidArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('trapezoid')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="area-label">Área:</span>
+                            <input type="text" id="trapezoidAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="triangle-area-title">Área de um Triângulo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="triangle-area-formula">Fórmula: A = (altura × base) / 2</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasTriangleBase"><span data-i18n="base">Base</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTriangleBase" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasTriangleHeight"><span data-i18n="height">Altura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTriangleHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTriangleArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('triangle')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="area-label">Área:</span>
+                            <input type="text" id="triangleAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="circumference-length-title">Comprimento de uma Circunferência</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="circumference-length-formula">Fórmula: C = 2 × 3.1415926536 × raio</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasCircumferenceRadius"><span data-i18n="radius">Raio</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCircumferenceRadius" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCircumferenceLength()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('circumference')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="circumference-label">Comprimento:</span>
+                            <input type="text" id="circumferenceResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="circle-area-title">Área de um Círculo</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="circle-area-formula">Fórmula: A = 3.1415926536 × raio²</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasCircleRadius"><span data-i18n="radius">Raio</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCircleRadius" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCircleArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('circle')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="area-label">Área:</span>
+                            <input type="text" id="circleAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="rectangular-prism-volume-title">Volume de um Prisma Retangular</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="rectangular-prism-volume-formula">Fórmula: V = comprimento × largura × altura</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasPrismLength"><span data-i18n="length">Comprimento</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPrismLength" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasPrismWidth"><span data-i18n="width">Largura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPrismWidth" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasPrismHeight"><span data-i18n="height">Altura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPrismHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateRectangularPrismVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('rectangularPrism')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="rectangularPrismVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="triangular-prism-volume-title">Volume de um Prisma Triangular</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="triangular-prism-volume-formula">Fórmula: V = (base do triângulo × altura do triângulo × altura do prisma) / 2</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasTriangularPrismBase"><span data-i18n="triangle-base">Base do Triângulo</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTriangularPrismBase" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasTriangularPrismHeight"><span data-i18n="triangle-height">Altura do Triângulo</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTriangularPrismHeight" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasTriangularPrismLength"><span data-i18n="prism-height">Altura do Prisma</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasTriangularPrismLength" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateTriangularPrismVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('triangularPrism')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="triangularPrismVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="cylinder-volume-title">Volume de um Cilindro</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="cylinder-volume-formula">Fórmula: V = 3.1415926536 × raio do cilindro² × altura do cilindro</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasCylinderRadius"><span data-i18n="radius">Raio</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCylinderRadius" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasCylinderHeight"><span data-i18n="cylinder-height">Altura do Cilindro</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCylinderHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCylinderVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('cylinder')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="cylinderVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="cone-volume-title">Volume de um Cone</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="cone-volume-formula">Fórmula: V = (3.1415926536 × raio do cone² × altura do cone) / 3</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasConeRadius"><span data-i18n="radius">Raio</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasConeRadius" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasConeHeight"><span data-i18n="height">Altura</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasConeHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateConeVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('cone')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="coneVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="pyramid-volume-title">Volume de uma Pirâmide</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="pyramid-volume-formula">Fórmula: V = (base × altura da base × altura da pirâmide) / 3</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasPyramidBase"><span data-i18n="base-area">Base</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPyramidBase" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasPyramidBaseHeight"><span data-i18n="base-height">Altura da Base</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPyramidBaseHeight" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasPyramidHeight"><span data-i18n="pyramid-height">Altura da Pirâmide</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasPyramidHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculatePyramidVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('pyramid')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="pyramidVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="sphere-volume-title">Volume de uma Esfera</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="sphere-volume-formula">Fórmula: V = [4 × 3.1415926536 × (raio da esfera)³] / 3</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasSphereRadius"><span data-i18n="sphere-radius">Raio da Esfera</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasSphereRadius" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSphereVolume()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('sphere')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="volume-label">Volume:</span>
+                            <input type="text" id="sphereVolumeResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="cylinder-surface-area-title">Área Superficial de um Cilindro</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="cylinder-surface-area-formula">Fórmula: A = (2 × π × raio × altura) + (2 × π × raio²)</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasCylinderSurfaceRadius"><span data-i18n="cylinder-radius">Raio do Cilindro</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCylinderSurfaceRadius" placeholder="0" step="0.001">
+                        </div>
+                        <div class="form-field">
+                            <label for="areasCylinderSurfaceHeight"><span data-i18n="cylinder-height">Altura do Cilindro</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasCylinderSurfaceHeight" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateCylinderSurfaceArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('cylinderSurface')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="surface-area-label">Área Superficial:</span>
+                            <input type="text" id="cylinderSurfaceAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3 data-i18n="sphere-surface-area-title">Área Superficial de uma Esfera</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="sphere-surface-area-formula">Fórmula: A = 4 × π × (raio da esfera)²</p>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="areasSphereSurfaceRadius"><span data-i18n="sphere-surface-radius">Raio da Esfera</span> <span class="unit-label">(m)</span></label>
+                            <input type="number" id="areasSphereSurfaceRadius" placeholder="0" step="0.001">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSphereSurfaceArea()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearAreasVolumeInputs('sphereSurface')" data-i18n="clear">Limpar</button>
+                    </div>
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="surface-area-label">Área Superficial:</span>
+                            <input type="text" id="sphereSurfaceAreaResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1599,6 +1952,175 @@
                 </div>
             </div>
 
+            <!-- Página de Controladores Digitais -->
+            <div id="digital-controllers" class="page">
+                <h2 data-i18n="digital-controllers-title">Controladores Digitais</h2>
+                
+                <div class="error-message"></div>
+                <div class="success-message"></div>
+
+                <!-- Controlador Dead-Beat -->
+                <div class="calculator-section">
+                    <h3 data-i18n="dead-beat-controller">Controlador Dead-Beat</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="dead-beat-formula">Dada a função de transferência da planta G(s) = [K·e^(-b·s)]/(s+a) e a Função de Transferência do Segurador de Ordem Zero H(s) = [1-e^(-s·T)]/s. Adotando-se o período de amostragem de 1s, e incluindo os parâmetros a, b e K nos campos abaixo, a Função de Transferência do controlador Dead-Beat é dada por D(z):</p>
+                    
+                    <div id="deadBeatControllerInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="deadBeatA"><span data-i18n="dead-beat-parameter-a">Parâmetro a</span></label>
+                            <input type="number" id="deadBeatA" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="deadBeatB"><span data-i18n="dead-beat-parameter-b">Parâmetro b</span></label>
+                            <input type="number" id="deadBeatB" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="deadBeatK"><span data-i18n="dead-beat-parameter-k">Parâmetro K</span></label>
+                            <input type="number" id="deadBeatK" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateDeadBeatController()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearDeadBeatController()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="dead-beat-result">Resultado D(z):</span>
+                            <input type="text" id="deadBeatControllerResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controladores PI e PID no domínio Z -->
+                <div class="calculator-section">
+                    <h3 data-i18n="pi-pid-z-controller">Controladores PI e PID no domínio Z</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="pi-pid-z-formula">Com os parâmetros do controlador PID Kp, Ti e Td e o período de amostragem T adicionados nos campos abaixo, as funções de transferência dos controladores PI e PID no domínio Z serão:</p>
+                    
+                    <div id="piPidZControllerInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="piPidKp"><span data-i18n="pi-pid-parameter-kp">Parâmetro Kp</span></label>
+                            <input type="number" id="piPidKp" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="piPidTi"><span data-i18n="pi-pid-parameter-ti">Parâmetro Ti</span></label>
+                            <input type="number" id="piPidTi" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="piPidTd"><span data-i18n="pi-pid-parameter-td">Parâmetro Td</span></label>
+                            <input type="number" id="piPidTd" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="piPidT"><span data-i18n="pi-pid-parameter-sampling-time">Tempo de amostragem T</span></label>
+                            <input type="number" id="piPidT" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculatePiPidZControllers()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearPiPidZControllers()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="pi-pid-result-dpi">Resultado Dpi(z):</span>
+                            <input type="text" id="piPidDpiResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="pi-pid-result-dpid">Resultado Dpid(z):</span>
+                            <input type="text" id="piPidDpidResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controladores PI e PID pelo método de Ziegler-Nichols -->
+                <div class="calculator-section">
+                    <h3 data-i18n="ziegler-nichols-controller">Controladores PI e PID pelo método de Ziegler-Nichols</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n="ziegler-nichols-formula">Para obter as funções de transferência dos controladores PI e PID no domínio Z utilizando o método de Ziegler-Nichols, adicione nos campos abaixo os parâmetros K, T1 (constante de tempo), TD (tempo de transporte) e o período de amostragem T.</p>
+                    
+                    <div id="zieglerNicholsControllerInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="zieglerT1"><span data-i18n="ziegler-nichols-parameter-t1">Parâmetro T1</span></label>
+                            <input type="number" id="zieglerT1" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="zieglerTd"><span data-i18n="ziegler-nichols-parameter-td">Parâmetro TD</span></label>
+                            <input type="number" id="zieglerTd" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="zieglerK"><span data-i18n="ziegler-nichols-parameter-k">Parâmetro K</span></label>
+                            <input type="number" id="zieglerK" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="zieglerT"><span data-i18n="ziegler-nichols-parameter-sampling-time">Período de amostragem T</span></label>
+                            <input type="number" id="zieglerT" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateZieglerNicholsControllers()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearZieglerNicholsControllers()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="ziegler-nichols-result-dpi">Resultado Dpi(z):</span>
+                            <input type="text" id="zieglerNicholsDpiResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="ziegler-nichols-result-dpid">Resultado Dpid(z):</span>
+                            <input type="text" id="zieglerNicholsDpidResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversão do Domínio S para o Domínio Z -->
+                <div class="calculator-section">
+                    <h3 data-i18n="s-to-z-domain-conversion">Conversão do Domínio S para o Domínio Z</h3>
+                    <p style="margin-bottom: 20px; color: #666;" data-i18n-html="s-to-z-domain-formula">Dada a função de transferência de uma planta do tipo G(s) = K/[(s+a)*(s+b)] e adicionando os parâmetros K, a, b e T nos campos abaixo, a função de transferência da planta no domínio Z será dada por G(z):</p>
+                    
+                    <div id="sToZPlantInputs" class="input-group">
+                        <div class="form-field">
+                            <label for="sToZK"><span data-i18n="s-to-z-parameter-k">Parâmetro K</span></label>
+                            <input type="number" id="sToZK" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="sToZa"><span data-i18n="s-to-z-parameter-a">Parâmetro a</span></label>
+                            <input type="number" id="sToZa" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="sToZb"><span data-i18n="s-to-z-parameter-b">Parâmetro b</span></label>
+                            <input type="number" id="sToZb" placeholder="0" step="any">
+                        </div>
+                        <div class="form-field">
+                            <label for="sToZT"><span data-i18n="s-to-z-parameter-t">Parâmetro T</span></label>
+                            <input type="number" id="sToZT" placeholder="0" step="any">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-calculate" onclick="calculateSToZPlantConversion()" data-i18n="calculate">Calcular</button>
+                        <button class="btn-clear" onclick="clearSToZPlantConversion()" data-i18n="clear">Limpar</button>
+                    </div>
+
+                    <div class="result-box">
+                        <h4 data-i18n="result">Resultado</h4>
+                        <div class="result-field">
+                            <span class="result-label" data-i18n="s-to-z-result">Resultado G(z):</span>
+                            <input type="text" id="sToZPlantResult" readonly style="border: none; background: transparent; text-align: right; padding: 0; font-family: 'Courier New', monospace; color: #764ba2; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section" style="border-left: 4px solid #764ba2;">
+                    <h3 data-i18n="bibliography">Referência Bibliográfica</h3>
+                    <p data-i18n="digital-controllers-reference">Microcontroller Based Applied Digital Control; D. Ibrahim; 2006 John Wiley & Sons, Ltda. ISBN: 0-470-86335-8.</p>
+                </div>
+            </div>
+
             <!-- Página de Conversão Digital -->
             <div id="digital-conversion" class="page">
                 <h2 data-i18n="digital-conversion-title">Conversão Digital</h2>
@@ -2294,12 +2816,12 @@
 
         <!-- Rodapé -->
         <footer>
-            <p>&copy; 2026 Calculadora para Estudantes, Técnicos e Engenheiros | Desenvolvida para estudantes e profissionais | <strong data-i18n="footer">Todos os direitos reservados ao Professor Paulo Régis Carneiro de Araújo</strong></p>
+            <p>&copy; 2026 <span data-i18n="footer-site-title">Calculadora para Estudantes, Técnicos e Engenheiros</span> | <span data-i18n="footer-description">Desenvolvida para estudantes e profissionais</span> | <strong data-i18n="footer">Todos os direitos reservados ao Professor Paulo Régis Carneiro de Araújo</strong></p>
         </footer>
     </div>
 
-    <script src="translations.js"></script>
-    <script src="calculations.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/calculations.js"></script>
     <script>
         // Traduzir a página quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function() {
